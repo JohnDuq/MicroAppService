@@ -159,3 +159,6 @@ target/
 *.class
 
 *.mwb.bak
+
+*.log
+*.logs
