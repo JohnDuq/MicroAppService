@@ -1,4 +1,4 @@
-package com.johnduq.example.microappservice;
+package com.johnduq.microappservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
