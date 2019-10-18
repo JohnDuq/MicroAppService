@@ -1,5 +1,6 @@
 package com.johnduq.microappservice.model.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -19,12 +20,16 @@ import lombok.Setter;
 @NoArgsConstructor
 public class User {
 
-	@Id
+	@Id @Column
 	private Integer idUser;
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idPerson")
 	private Person person;
+	@Column
 	private String user;
+	@Column
+	private String password;
+	@Column
 	private String status;
 	
 	

@@ -1,5 +1,6 @@
 package com.johnduq.microappservice.model.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -19,7 +20,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class RolePermission {
 
-	@Id
+	@Id @Column
 	private Integer idRolePermission;
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idRole")
