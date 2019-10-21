@@ -1,12 +1,12 @@
 package com.johnduq.microappservice.util;
 
-public enum DateFormatValues {
+public enum TypeDateFormat {
 
 	COMPLETE_DATE("yyyy/MM/dd HH:mm:ss.SSS");
 
 	private String code;
 
-	private DateFormatValues(String code) {
+	private TypeDateFormat(String code) {
 		this.code = code;
 	}
 

@@ -10,7 +10,7 @@ import java.util.TimeZone;
 public class DateUtil {
 
 	public static String dateToSring(Date date) {
-		DateFormat dateFormat = new SimpleDateFormat(DateFormatValues.COMPLETE_DATE.getCode());
+		DateFormat dateFormat = new SimpleDateFormat(TypeDateFormat.COMPLETE_DATE.getCode());
 		String strDate = dateFormat.format(date);
 		return strDate;
 	}
