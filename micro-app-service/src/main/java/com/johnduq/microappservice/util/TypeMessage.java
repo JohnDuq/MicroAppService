@@ -2,7 +2,7 @@ package com.johnduq.microappservice.util;
 
 public enum TypeMessage {
 
-	SUCCESS(2000, "Success"), INFO(3000, "Info"), WARN(4000, "Warn"), ERROR(5000, "Error");
+	SUCCESS(2000, "Success"), INFO(2000, "Info"), WARN(3000, "Warn"), ERROR(4000, "Error");
 
 	private int code;
 	private String name;

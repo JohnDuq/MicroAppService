@@ -34,7 +34,7 @@ public class User implements Serializable {
 	@JoinColumn(name = "id_person")
 	private Person person;
 	@Column(length = 30, unique = true)
-	private String userName;
+	private String username;
 	@Column(length = 15)
 	private String password;
 	@Column

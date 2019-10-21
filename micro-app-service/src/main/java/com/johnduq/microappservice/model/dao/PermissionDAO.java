@@ -12,9 +12,9 @@ public interface PermissionDAO extends CrudRepository<Permission, Integer> {
 
 	@Query("SELECT prm FROM Permission prm WHERE prm.idPermission IN ("
 			+ "	SELECT rlprm.permission.idPermission FROM RolePermission rlprm WHERE rlprm.role.idRole IN ("
-			+ "		SELECT usrrl.role.idRole FROM UserRole usrrl WHERE usrrl.user.userName = :userName"
+			+ "		SELECT usrrl.role.idRole FROM UserRole usrrl WHERE usrrl.user.username = :username"
 			+ "	)"
 			+ ")")
-	List<Permission> findByUser(@Param("userName") String userName);
+	List<Permission> findByUser(@Param("username") String username);
 	
 }

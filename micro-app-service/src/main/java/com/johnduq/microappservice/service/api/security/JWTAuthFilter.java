@@ -24,7 +24,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.johnduq.microappservice.model.dto.Response;
+import com.johnduq.microappservice.model.entity.User;
 import com.johnduq.microappservice.service.config.GeneralPathValue;
+import com.johnduq.microappservice.util.JsonUtil;
+import com.johnduq.microappservice.util.MessageUtil;
 import com.johnduq.microappservice.util.TypeAuthValues;
 import com.johnduq.microappservice.util.TypeContentWeb;
 
@@ -46,8 +50,23 @@ public class JWTAuthFilter extends UsernamePasswordAuthenticationFilter {
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
-		String username = obtainUsername(request) == null ? "" : obtainUsername(request);
-		String password = obtainPassword(request) == null ? "" : obtainPassword(request);
+		
+		//get values from form-data
+		String username = obtainUsername(request);
+		String password = obtainPassword(request);
+		
+		if(username == null && password == null) {
+			//get values from body
+			User user;
+			try {
+				user = (User) JsonUtil.convertJsonToObject(request.getInputStream(), User.class);
+				username = user.getUsername();
+				password = user.getPassword();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		username = username.trim();
 		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
 		return this.authenticationManager.authenticate(token);
@@ -57,7 +76,7 @@ public class JWTAuthFilter extends UsernamePasswordAuthenticationFilter {
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
 
-		String userName = authResult.getName();
+		String username = authResult.getName();
 		
 		SecretKey secretKey = new SecretKeySpec(THE_SECRET_VALUE_FOR_MICRO_APP_SERVICE_PROJECT.getBytes(), SignatureAlgorithm.HS256.getJcaName());
 		
@@ -66,7 +85,7 @@ public class JWTAuthFilter extends UsernamePasswordAuthenticationFilter {
 
 		String tokenJWT = Jwts.builder()
 				.setClaims(claims)													//put permissions for token
-				.setSubject(userName)												//put user for token
+				.setSubject(username)												//put user for token
 				.signWith(secretKey)												//put the secret key for token
 				.setIssuedAt(dateCreated)											//put date create token
 				.setExpiration(new Date(System.currentTimeMillis() + 3600000L))		//put date expire token
@@ -76,17 +95,28 @@ public class JWTAuthFilter extends UsernamePasswordAuthenticationFilter {
 
 		Map<String, Object> body = new HashMap<String, Object>();
 		body.put("token", tokenJWT);
-		body.put("user", userName);
+		body.put("user", username);
 
-		response.getWriter().write(new ObjectMapper().writeValueAsString(body));
+		response.getWriter().write(JsonUtil.convertObjectToJson(body));
 		response.setStatus(200);
+		response.setContentType(TypeContentWeb.APPLICATION_JSON.getCode());
+	}
+
+	@Override
+	protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
+			AuthenticationException failed) throws IOException, ServletException {
+		Map<String, Object> body = new HashMap<String, Object>();
+		body.put("MicroAppService", MessageUtil.addGenericErrorMessage(new Response()));
+		body.put("error", failed.getMessage());
+		response.getWriter().write(JsonUtil.convertObjectToJson(body));
+		response.setStatus(401);
 		response.setContentType(TypeContentWeb.APPLICATION_JSON.getCode());
 	}
 
 	private Claims getPermissionsAsClaims(Authentication authResult) throws JsonProcessingException {
 		Collection<? extends GrantedAuthority> permissions = authResult.getAuthorities();
 		Claims claims = Jwts.claims();
-		claims.put(TypeAuthValues.AUTHORITIES.getCode(), new ObjectMapper().writeValueAsString(permissions));
+		claims.put(TypeAuthValues.AUTHORITIES.getCode(), JsonUtil.convertObjectToJson(permissions));
 		return claims;
 	}
 

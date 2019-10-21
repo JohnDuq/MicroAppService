@@ -36,13 +36,13 @@ public class UserSecurity implements UserDetailsService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		com.johnduq.microappservice.model.entity.User user = iUserControl.findByUser(userName);
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		com.johnduq.microappservice.model.entity.User user = iUserControl.findByUser(username);
 		if (user == null) {
-			logger.error(USUARIO_NO_EXISTE + userName);
-			throw new UsernameNotFoundException(USUARIO_NO_EXISTE + userName);
+			logger.error(USUARIO_NO_EXISTE + username);
+			throw new UsernameNotFoundException(USUARIO_NO_EXISTE + username);
 		}
-		List<Permission> lPermission = iPermissionControl.findByUser(userName);
+		List<Permission> lPermission = iPermissionControl.findByUser(username);
 
 		if (lPermission.isEmpty()) {
 			logger.error(USUARIO_NO_TIENE_PERMISOS);
@@ -53,7 +53,7 @@ public class UserSecurity implements UserDetailsService {
 
 		lPermission.forEach(permission -> lAuthorities.add(new SimpleGrantedAuthority(permission.getName())));
 
-		User userDetails = new User(user.getUserName(), user.getPassword(),
+		User userDetails = new User(user.getUsername(), user.getPassword(),
 				TypeState.ENABLE.getCode().equals(user.getStatus()), true, true, true, lAuthorities);
 
 		return userDetails;
