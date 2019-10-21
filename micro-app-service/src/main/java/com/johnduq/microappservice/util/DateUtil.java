@@ -24,8 +24,8 @@ public class DateUtil {
 		}
 		return dateFormated;
 	}
-
-	public static Date getColombiaDate() {
+	
+	public static Date getColombianDate() {
 		Calendar cSchedStartCal = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
 		long gmtTime = cSchedStartCal.getTime().getTime();
 
