@@ -2,7 +2,7 @@ package com.johnduq.microappservice.util;
 
 public enum TypeAuthValues {
 
-	AUTHORIZATION("authorization"), AUTHORITIES("authorities"), BEARER("Bearer"), TOKEN("token"), USER("user");
+	AUTHORIZATION("authorization"), AUTHORITIES("authorities"), AUTHORITY("authority"), BEARER("Bearer"), BEARER_("Bearer "), TOKEN("token"), USER("user");
 
 	private String code;
 

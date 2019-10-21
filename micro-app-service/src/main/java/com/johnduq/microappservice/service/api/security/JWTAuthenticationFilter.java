@@ -23,10 +23,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.johnduq.microappservice.model.dto.Response;
 import com.johnduq.microappservice.model.entity.User;
 import com.johnduq.microappservice.service.config.GeneralPathValue;
+import com.johnduq.microappservice.util.JsonKeyValue;
 import com.johnduq.microappservice.util.JsonUtil;
 import com.johnduq.microappservice.util.MessageUtil;
 import com.johnduq.microappservice.util.TypeAuthValues;
@@ -36,12 +36,11 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-public class JWTAuthFilter extends UsernamePasswordAuthenticationFilter {
+public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-	private static final String THE_SECRET_VALUE_FOR_MICRO_APP_SERVICE_PROJECT = "theSecretValueForMicroAppServiceProject";
 	private AuthenticationManager authenticationManager;
 
-	public JWTAuthFilter(AuthenticationManager authenticationManager) {
+	public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
 		this.authenticationManager = authenticationManager;
 		setRequiresAuthenticationRequestMatcher(
 				new AntPathRequestMatcher(GeneralPathValue.PATH_LOGIN, RequestMethod.POST.toString()));
@@ -78,7 +77,7 @@ public class JWTAuthFilter extends UsernamePasswordAuthenticationFilter {
 
 		String username = authResult.getName();
 		
-		SecretKey secretKey = new SecretKeySpec(THE_SECRET_VALUE_FOR_MICRO_APP_SERVICE_PROJECT.getBytes(), SignatureAlgorithm.HS256.getJcaName());
+		SecretKey secretKey = new SecretKeySpec(JsonKeyValue.THE_SECRET_VALUE_FOR_MICRO_APP_SERVICE_PROJECT.getBytes(), SignatureAlgorithm.HS256.getJcaName());
 		
 		Date dateCreated = new Date();
 		Claims claims = getPermissionsAsClaims(authResult);

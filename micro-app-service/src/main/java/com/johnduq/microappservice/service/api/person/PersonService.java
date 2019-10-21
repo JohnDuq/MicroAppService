@@ -3,14 +3,16 @@ package com.johnduq.microappservice.service.api.person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.johnduq.microappservice.control.IPersonControl;
 import com.johnduq.microappservice.model.dto.Response;
 import com.johnduq.microappservice.service.config.GeneralPathValue;
+import com.johnduq.microappservice.service.config.PersonPathValue;
 import com.johnduq.microappservice.util.MessageUtil;
+import com.johnduq.microappservice.util.Roles;
 import com.johnduq.microappservice.util.TypeConsume;
 
 @RestController
@@ -22,7 +24,8 @@ public class PersonService {
 	@Autowired
 	private IPersonControl iPersonControl;
 
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(path = PersonPathValue.PERSON)
+	@Secured({Roles.ADMIN})
 	public Response getPersonService() {
 		try {
 			PersonGetResponse personResponse = new PersonGetResponse(iPersonControl.getPersonService());

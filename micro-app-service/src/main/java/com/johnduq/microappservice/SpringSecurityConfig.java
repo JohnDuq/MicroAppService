@@ -9,7 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.johnduq.microappservice.service.api.security.JWTAuthFilter;
+import com.johnduq.microappservice.service.api.security.JWTAuthenticationFilter;
+import com.johnduq.microappservice.service.api.security.JWTAuthorizationFilter;
 import com.johnduq.microappservice.service.api.security.UserSecurity;
 
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
@@ -27,7 +28,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		// super.configure(http);
 		http.authorizeRequests().antMatchers("/", "/css/**", "/js/**", "/images/**", "/locale").permitAll().anyRequest()
 				.authenticated().and()
-				.addFilter(new JWTAuthFilter(authenticationManager()))
+				.addFilter(new JWTAuthorizationFilter(authenticationManager()))
+				.addFilter(new JWTAuthenticationFilter(authenticationManager()))
 				.csrf().disable().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}

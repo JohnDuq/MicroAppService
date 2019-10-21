@@ -15,13 +15,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.johnduq.microappservice.control.IPermissionControl;
+import com.johnduq.microappservice.control.IRoleControl;
 import com.johnduq.microappservice.control.IUserControl;
-import com.johnduq.microappservice.model.entity.Permission;
+import com.johnduq.microappservice.model.entity.Role;
 import com.johnduq.microappservice.util.TypeState;
 
 @Service
 public class UserSecurity implements UserDetailsService {
+
+	private static final String ROLE_ = "ROLE_";
 
 	private static final String USUARIO_NO_TIENE_PERMISOS = "Usuario no tiene permisos";
 
@@ -32,7 +34,7 @@ public class UserSecurity implements UserDetailsService {
 	@Autowired
 	private IUserControl iUserControl;
 	@Autowired
-	private IPermissionControl iPermissionControl;
+	private IRoleControl iRoleControl;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -42,16 +44,16 @@ public class UserSecurity implements UserDetailsService {
 			logger.error(USUARIO_NO_EXISTE + username);
 			throw new UsernameNotFoundException(USUARIO_NO_EXISTE + username);
 		}
-		List<Permission> lPermission = iPermissionControl.findByUser(username);
+		List<Role> lRole = iRoleControl.findByUser(username);
 
-		if (lPermission.isEmpty()) {
+		if (lRole.isEmpty()) {
 			logger.error(USUARIO_NO_TIENE_PERMISOS);
 			throw new UsernameNotFoundException(USUARIO_NO_TIENE_PERMISOS);
 		}
 
 		List<GrantedAuthority> lAuthorities = new ArrayList<GrantedAuthority>();
 
-		lPermission.forEach(permission -> lAuthorities.add(new SimpleGrantedAuthority(permission.getName())));
+		lRole.forEach(role -> lAuthorities.add(new SimpleGrantedAuthority(ROLE_ + role.getName())));
 
 		User userDetails = new User(user.getUsername(), user.getPassword(),
 				TypeState.ENABLE.getCode().equals(user.getStatus()), true, true, true, lAuthorities);
