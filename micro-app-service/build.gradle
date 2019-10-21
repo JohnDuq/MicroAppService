@@ -18,6 +18,7 @@ repositories {
 	mavenCentral()
 }
 
+//Tarea fatJar para construir un JAR con todas las dependencias empaquetadas
 task fatJar(type: Jar) {
     baseName = project.name + '-all'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } } {
@@ -30,13 +31,19 @@ task fatJar(type: Jar) {
 }
 
 dependencies {
+	//Dependencia para servicios web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//Dependencias para acceso a datos
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	
 	runtimeOnly 'mysql:mysql-connector-java'
+	//Dependencias de seguridad
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	compile "io.jsonwebtoken:jjwt-api:0.10.5"
+	compile "io.jsonwebtoken:jjwt-impl:0.10.5"
+	compile "io.jsonwebtoken:jjwt-jackson:0.10.5"
+	//Dependencias lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	//Dependencias de testing
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
