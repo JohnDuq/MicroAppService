@@ -25,9 +25,11 @@ import com.johnduq.microappservice.util.JsonUtil;
 import com.johnduq.microappservice.util.MessageUtil;
 import com.johnduq.microappservice.util.TypeAuthValues;
 import com.johnduq.microappservice.util.TypeContentWeb;
+import com.johnduq.microappservice.util.TypeMessage;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
+	private static final String MICRO_APP_SERVICE = "MicroAppService";
 	private AuthenticationManager authenticationManager;
 	private IJWTService ijwtService;
 
@@ -72,8 +74,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		response.addHeader(TypeAuthValues.AUTHORIZATION.getCode(), TypeAuthValues.BEARER + " " + tokenJWT);
 
 		Map<String, Object> body = new HashMap<String, Object>();
-		body.put("token", tokenJWT);
-		body.put("user", authentication.getName());
+		body.put(TypeAuthValues.TOKEN.getCode(), tokenJWT);
+		body.put(TypeAuthValues.USER.getCode(), authentication.getName());
 
 		response.getWriter().write(JsonUtil.convertObjectToJson(body));
 		response.setStatus(200);
@@ -84,8 +86,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException failed) throws IOException, ServletException {
 		Map<String, Object> body = new HashMap<String, Object>();
-		body.put("MicroAppService", MessageUtil.addGenericErrorMessage(new Response()));
-		body.put("error", failed.getMessage());
+		body.put(MICRO_APP_SERVICE, MessageUtil.addGenericErrorMessage(new Response()));
+		body.put(TypeMessage.ERROR.getName(), failed.getMessage());
 		response.getWriter().write(JsonUtil.convertObjectToJson(body));
 		response.setStatus(401);
 		response.setContentType(TypeContentWeb.APPLICATION_JSON.getCode());

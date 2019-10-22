@@ -25,9 +25,8 @@ public class UserSecurity implements UserDetailsService {
 
 	private static final String ROLE_ = "ROLE_";
 
-	private static final String USUARIO_NO_TIENE_PERMISOS = "Usuario no tiene permisos";
-
-	private static final String USUARIO_NO_EXISTE = "Usuario no existe:";
+	private static final String USER_DNOT_HAVE_PERMISSIONS = "User does not have permissions";
+	private static final String USER_DNOT_EXIST = "User does not exist:";
 
 	private static final Logger logger = LoggerFactory.getLogger(UserSecurity.class);
 
@@ -41,14 +40,14 @@ public class UserSecurity implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		com.johnduq.microappservice.model.entity.User user = iUserControl.findByUser(username);
 		if (user == null) {
-			logger.error(USUARIO_NO_EXISTE + username);
-			throw new UsernameNotFoundException(USUARIO_NO_EXISTE + username);
+			logger.error(USER_DNOT_EXIST + username);
+			throw new UsernameNotFoundException(USER_DNOT_EXIST + username);
 		}
 		List<Role> lRole = iRoleControl.findByUser(username);
 
 		if (lRole.isEmpty()) {
-			logger.error(USUARIO_NO_TIENE_PERMISOS);
-			throw new UsernameNotFoundException(USUARIO_NO_TIENE_PERMISOS);
+			logger.error(USER_DNOT_HAVE_PERMISSIONS);
+			throw new UsernameNotFoundException(USER_DNOT_HAVE_PERMISSIONS);
 		}
 
 		List<GrantedAuthority> lAuthorities = new ArrayList<GrantedAuthority>();
