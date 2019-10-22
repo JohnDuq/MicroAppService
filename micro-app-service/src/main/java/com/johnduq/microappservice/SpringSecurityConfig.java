@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.johnduq.microappservice.service.api.auth.IJWTService;
 import com.johnduq.microappservice.service.api.security.JWTAuthenticationFilter;
 import com.johnduq.microappservice.service.api.security.JWTAuthorizationFilter;
 import com.johnduq.microappservice.service.api.security.UserSecurity;
@@ -22,14 +23,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private IJWTService iJWTService;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// super.configure(http);
 		http.authorizeRequests().antMatchers("/", "/css/**", "/js/**", "/images/**", "/locale").permitAll().anyRequest()
 				.authenticated().and()
-				.addFilter(new JWTAuthorizationFilter(authenticationManager()))
-				.addFilter(new JWTAuthenticationFilter(authenticationManager()))
+				.addFilter(new JWTAuthenticationFilter(authenticationManager(), iJWTService))
+				.addFilter(new JWTAuthorizationFilter(authenticationManager(), iJWTService))
 				.csrf().disable().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
