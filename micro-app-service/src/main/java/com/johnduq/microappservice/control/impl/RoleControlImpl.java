@@ -25,4 +25,21 @@ public class RoleControlImpl implements IRoleControl {
 		return roleDAO.findByUser(username);
 	}
 
+	@Override
+	public Role findByIdRole(Integer idRole) {
+		return roleDAO.findByIdRole(idRole);
+	}
+
+	@Override
+	public Role save(Role role) {
+		return roleDAO.save(role);
+	}
+
+	@Override
+	public Role delete(Integer idRole) {
+		Role role = roleDAO.findByIdRole(idRole);
+		roleDAO.delete(role);
+		return role;
+	}
+
 }

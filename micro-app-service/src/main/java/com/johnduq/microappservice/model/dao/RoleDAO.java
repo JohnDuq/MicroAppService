@@ -13,6 +13,9 @@ public interface RoleDAO extends CrudRepository<Role, Integer>{
 	@Query("SELECT rl FROM Role rl")
 	List<Role> findAll();
 	
+	@Query("SELECT rl FROM Role rl WHERE rl.idRole = :idRole")
+	Role findByIdRole(@Param("idRole")Integer idRole);
+	
 	@Query("SELECT usrrl.role FROM UserRole usrrl WHERE usrrl.user.username = :username")
 	List<Role> findByUser(@Param("username") String username);
 	
