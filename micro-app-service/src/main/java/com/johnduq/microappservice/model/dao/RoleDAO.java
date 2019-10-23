@@ -10,6 +10,9 @@ import com.johnduq.microappservice.model.entity.Role;
 
 public interface RoleDAO extends CrudRepository<Role, Integer>{
 
+	@Query("SELECT rl FROM Role rl")
+	List<Role> findAll();
+	
 	@Query("SELECT usrrl.role FROM UserRole usrrl WHERE usrrl.user.username = :username")
 	List<Role> findByUser(@Param("username") String username);
 	

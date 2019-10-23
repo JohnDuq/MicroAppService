@@ -6,6 +6,8 @@ import com.johnduq.microappservice.model.entity.Role;
 
 public interface IRoleControl {
 
+	public List<Role> findAll();
 	public List<Role> findByUser(String username);
+	
 	
 }

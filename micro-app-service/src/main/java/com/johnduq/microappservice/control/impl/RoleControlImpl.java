@@ -16,6 +16,11 @@ public class RoleControlImpl implements IRoleControl {
 	private RoleDAO roleDAO;
 	
 	@Override
+	public List<Role> findAll() {
+		return roleDAO.findAll();
+	}
+	
+	@Override
 	public List<Role> findByUser(String username) {
 		return roleDAO.findByUser(username);
 	}

@@ -30,5 +30,8 @@ public class Role implements Serializable {
 	@Column(unique = true)
 	private String name;
 	@Column
+	private String status;
+	@Column
 	private String description;
+	
 }
