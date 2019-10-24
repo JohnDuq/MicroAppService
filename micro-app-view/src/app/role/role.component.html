@@ -1,0 +1,78 @@
+<div class="card border-info mb-3">
+    <div class="card-header">Role</div>
+    <div class="card-body text-info">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon3">Id</span>
+                        </div>
+                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+                            value="{{ rolePrincipal.idRole }}" disabled>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon3">Name</span>
+                        </div>
+                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+                            [(ngModel)]="rolePrincipal.name">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Description</span>
+                        </div>
+                        <textarea class="form-control" aria-label="With textarea"
+                            [(ngModel)]="rolePrincipal.description"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-success" label="Save"
+                        icon="pi pi-check"></button>
+                    <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Clean"
+                        icon="pi pi-refresh" (click)="clean()"></button>
+                    <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-danger" label="Delete"
+                        icon="pi pi-trash"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card border-info mb-3">
+    <div class="card-header">Role List</div>
+    <div class="card-body text-info">
+        <table class="table table-striped">
+            <thead>
+                <tr class="table-info">
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let role of lRoles">
+                    <td>{{ role.idRole }}</td>
+                    <td>{{ role.name }}</td>
+                    <td>{{ role.description }}</td>
+                    <td>
+                        <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Edit"
+                            icon="pi pi-pencil" (click)="editRole(role)"></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
