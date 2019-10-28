@@ -1,3 +1,5 @@
+<p-progressBar mode="indeterminate" [style]="{'height': '6px'}" *ngIf="blockedDocument"></p-progressBar>
+<p-blockUI [blocked]="blockedDocument"></p-blockUI>
 <div class="card border-info mb-3">
     <div class="card-header">Role</div>
     <div class="card-body text-info">
@@ -18,7 +20,7 @@
                             <span class="input-group-text" id="basic-addon3">Name</span>
                         </div>
                         <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
-                            [(ngModel)]="rolePrincipal.name">
+                            ng-pattern="/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/" [(ngModel)]="rolePrincipal.name">
                     </div>
                 </div>
             </div>
@@ -39,12 +41,14 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-success" label="Save"
-                        icon="pi pi-check"></button>
+                    <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-success"
+                        label="Save" icon="pi pi-check" (click)="saveRole()"></button>
                     <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Clean"
                         icon="pi pi-refresh" (click)="clean()"></button>
-                    <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-danger" label="Delete"
-                        icon="pi pi-trash"></button>
+                    <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-danger"
+                        label="Delete" icon="pi pi-trash"
+                        *ngIf="rolePrincipal.idRole != null && rolePrincipal.idRole != 1"
+                        (click)="deleteRole()"></button>
                 </div>
             </div>
         </div>
@@ -70,6 +74,10 @@
                     <td>
                         <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Edit"
                             icon="pi pi-pencil" (click)="editRole(role)"></button>
+                        <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-danger"
+                            label="Delete" icon="pi pi-trash"
+                            [disabled]="role.idRole == 1"
+                            (click)="deleteRoleTable(role)"></button>
                     </td>
                 </tr>
             </tbody>

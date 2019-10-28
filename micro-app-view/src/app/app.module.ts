@@ -20,6 +20,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { UserComponent } from './user/user.component';
+import { BlockUIModule } from 'primeng/blockui';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 //////
 import { HttpClientModule } from '@angular/common/http';
@@ -48,7 +50,9 @@ const routes: Routes = [
     ButtonModule,
     InputTextModule,
     InputSwitchModule,
-    SelectButtonModule
+    SelectButtonModule,
+    BlockUIModule,
+    ProgressBarModule
   ],
   providers: [RoleService],
   bootstrap: [AppComponent]

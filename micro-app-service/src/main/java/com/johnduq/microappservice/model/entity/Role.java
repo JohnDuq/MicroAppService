@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -31,5 +33,15 @@ public class Role implements Serializable {
 	private String name;
 	@Column
 	private String description;
+	
+	@PrePersist
+	private void preInsert() {
+		this.name = this.name.toUpperCase().replace(" ", "_");
+	}
+	
+	@PreUpdate
+	private void preUpdate() {
+		this.name = this.name.toUpperCase().replace(" ", "_");
+	}
 	
 }

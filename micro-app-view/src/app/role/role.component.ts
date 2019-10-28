@@ -1,5 +1,5 @@
+import { Role } from './../model/Role';
 import { Component, OnInit } from '@angular/core';
-import { Role } from '../model/Role';
 import { RoleService } from './role.service';
 import { SelectItem } from 'primeng/components/common/selectitem';
 
@@ -9,6 +9,7 @@ import { SelectItem } from 'primeng/components/common/selectitem';
 })
 export class RoleComponent implements OnInit {
 
+  blockedDocument: boolean = false;
   rolePrincipal: Role;
   lRoles: Role[];
 
@@ -16,13 +17,50 @@ export class RoleComponent implements OnInit {
 
   ngOnInit() {
     this.rolePrincipal = new Role();
-    this.roleService.getRoles().subscribe(
-      (response) => this.lRoles = response.listRoles
-    );
+    this.getListRole();
   }
 
   public saveRole(): void {
+    this.blockedDocument = true;
+    if (this.rolePrincipal.idRole == null) {
+      this.roleService.postRole(this.rolePrincipal).subscribe(
+        (response) => {
+          this.rolePrincipal = response.role;
+          this.getListRole();
+          this.blockedDocument = false;
+        }
+      );
+    } else {
+      this.roleService.putRole(this.rolePrincipal).subscribe(
+        (response) => {
+          this.rolePrincipal = response.role;
+          this.getListRole();
+          this.blockedDocument = false;
+        }
+      );
+    }
+  }
 
+  public deleteRole(): void {
+    this.blockedDocument = true;
+    this.roleService.deleteRole(this.rolePrincipal).subscribe(
+      (response) => {
+        this.clean();
+        this.getListRole();
+        this.blockedDocument = false;
+      }
+    );
+  }
+
+  public deleteRoleTable(roleDelete: Role): void {
+    this.blockedDocument = true;
+    this.roleService.deleteRole(roleDelete).subscribe(
+      (response) => {
+        this.clean();
+        this.getListRole();
+        this.blockedDocument = false;
+      }
+    );
   }
 
   public editRole(roleEdit: Role): void {
@@ -34,6 +72,12 @@ export class RoleComponent implements OnInit {
 
   public clean(): void {
     this.rolePrincipal = new Role();
+  }
+
+  public getListRole(): void {
+    this.roleService.getRoles().subscribe(
+      (response) => this.lRoles = response.listRoles
+    );
   }
 
 }
