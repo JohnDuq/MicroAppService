@@ -1,7 +1,6 @@
 import { Role } from './../model/Role';
 import { Component, OnInit } from '@angular/core';
 import { RoleService } from './role.service';
-import { SelectItem } from 'primeng/components/common/selectitem';
 
 @Component({
   selector: 'app-role',

@@ -42,7 +42,7 @@
             <div class="row">
                 <div class="col">
                     <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-success"
-                        label="Save" icon="pi pi-check" (click)="saveRole()"></button>
+                        label="Save" icon="pi pi-check" (click)="saveRole()" [disabled]="rolePrincipal.idRole == 1"></button>
                     <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Clean"
                         icon="pi pi-refresh" (click)="clean()"></button>
                     <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-danger"

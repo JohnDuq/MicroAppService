@@ -25,36 +25,42 @@ import { ProgressBarModule } from 'primeng/progressbar';
 
 //////
 import { HttpClientModule } from '@angular/common/http';
+import { AuthorizationComponent } from './authorization/authorization.component';
 
 const routes: Routes = [
   {path: '', redirectTo:'/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
-  {path: 'role', component: RoleComponent},
+  {path: 'auth', component: AuthorizationComponent},
   {path: 'user', component: UserComponent}
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    HomeComponent,
-    FooterComponent,
-    RoleComponent,
-    UserComponent
-  ],
-  imports: [
-    FormsModule,
-    BrowserModule,
-    RouterModule.forRoot(routes), 
-    HttpClientModule,
-    ButtonModule,
-    InputTextModule,
-    InputSwitchModule,
-    SelectButtonModule,
-    BlockUIModule,
-    ProgressBarModule
-  ],
-  providers: [RoleService],
-  bootstrap: [AppComponent]
+   declarations: [
+      AppComponent,
+      HeaderComponent,
+      HomeComponent,
+      FooterComponent,
+      RoleComponent,
+      UserComponent,
+      AuthorizationComponent
+   ],
+   imports: [
+      FormsModule,
+      BrowserModule,
+      RouterModule.forRoot(routes),
+      HttpClientModule,
+      ButtonModule,
+      InputTextModule,
+      InputSwitchModule,
+      SelectButtonModule,
+      BlockUIModule,
+      ProgressBarModule
+   ],
+   providers: [
+      RoleService
+   ],
+   bootstrap: [
+      AppComponent
+   ]
 })
 export class AppModule { }
