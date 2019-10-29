@@ -1,0 +1,149 @@
+<div class="accordion" id="accordionExample">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne"
+                    aria-expanded="false" aria-controls="collapseOne">
+                    Admin
+                </button>
+            </h2>
+        </div>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+                <div class="card border-info mb-3">
+                    <div class="card-body text-info">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon3">Id</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="basic-url"
+                                            value="{{ userSelected.idUser }}"
+                                            aria-describedby="basic-addon3">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button"
+                                                id="button-addon2">Find</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon3">Username</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="basic-url"
+                                            value="{{ userSelected.username }}"
+                                            aria-describedby="basic-addon3">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button"
+                                                id="button-addon2">Find</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon3">Password</span>
+                                        </div>
+                                        <input type="password" class="form-control" id="basic-url"
+                                            value="{{ userSelected.password }}"
+                                            aria-describedby="basic-addon3">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <p-inputSwitch [(ngModel)]="userSelected.statusBool"></p-inputSwitch>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="progress" style="height: 25px;">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 100%;"
+                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Roles user</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <p-pickList [source]="list1" [target]="list2" [responsive]="true" filterBy="brand"
+                                        [showSourceControls]="false" [showTargetControls]="false"
+                                        sourceHeader="Roles available" targetHeader="Roles selected" dragdrop="true"
+                                        sourceFilterPlaceholder="Search by Role Name"
+                                        targetFilterPlaceholder="Search by Role Name">
+                                        <ng-template let-car pTemplate="item">
+                                            <div class="ui-helper-clearfix">
+                                                <div style="font-size:14px;float:right;margin:15px 5px 0 0">
+                                                    {{car.brand}} -
+                                                    {{car.year}} - {{car.color}}</div>
+                                            </div>
+                                        </ng-template>
+                                    </p-pickList>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted text-center">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <button pButton type="button"
+                                        class="ui-button-raised ui-button-rounded ui-button-success" label="Save"
+                                        icon="pi pi-check"></button>
+                                    <button pButton type="button" class="ui-button-raised ui-button-rounded"
+                                        label="Clean" icon="pi pi-refresh"></button>
+                                    <button pButton type="button"
+                                        class="ui-button-raised ui-button-rounded ui-button-danger" label="Delete"
+                                        icon="pi pi-trash"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    List
+                </button>
+            </h2>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="table-info">
+                            <th>Id</th>
+                            <th>Username</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of listUsers">
+                            <td>{{ user.idUser }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>
+                                <p-inputSwitch readonly="true" [(ngModel)]="user.statusBool"></p-inputSwitch>
+                            </td>
+                            <td>
+                                <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Edit"
+                                    (click)="editUser(user)"
+                                    icon="pi pi-pencil"></button>
+                                <button pButton type="button"
+                                    class="ui-button-raised ui-button-rounded ui-button-danger" label="Delete"
+                                    icon="pi pi-trash"></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

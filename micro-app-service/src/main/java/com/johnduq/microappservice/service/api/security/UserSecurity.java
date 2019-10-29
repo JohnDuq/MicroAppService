@@ -38,7 +38,7 @@ public class UserSecurity implements UserDetailsService {
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		com.johnduq.microappservice.model.entity.User user = iUserControl.findByUser(username);
+		com.johnduq.microappservice.model.entity.User user = iUserControl.findByUsername(username);
 		if (user == null) {
 			logger.error(USER_DNOT_EXIST + username);
 			throw new UsernameNotFoundException(USER_DNOT_EXIST + username);

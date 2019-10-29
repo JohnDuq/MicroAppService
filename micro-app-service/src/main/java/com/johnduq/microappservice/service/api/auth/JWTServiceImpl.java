@@ -46,7 +46,7 @@ public class JWTServiceImpl implements IJWTService {
 				.setSubject(username) // put user for token
 				.signWith(secretKey) // put the secret key for token
 				.setIssuedAt(dateCreated) // put date create token
-				.setExpiration(new Date(System.currentTimeMillis() + _1HOUR)) // put date expire token
+				.setExpiration(new Date(System.currentTimeMillis() + (_1HOUR * 12))) // put date expire token
 				.compact();
 		return tokenJWT;
 	}

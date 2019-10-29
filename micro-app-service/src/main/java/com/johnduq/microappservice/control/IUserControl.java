@@ -1,9 +1,15 @@
 package com.johnduq.microappservice.control;
 
+import java.util.List;
+
 import com.johnduq.microappservice.model.entity.User;
 
 public interface IUserControl {
 
-	User findByUser(String user);
+	public List<User> findAll();
+	public User findByIdUser(Integer idUser);
+	public User findByUsername(String username);
+	public User save(User user);
+	public User delete(Integer idUser);
 	
 }

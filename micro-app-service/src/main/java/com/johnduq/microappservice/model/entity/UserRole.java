@@ -1,5 +1,7 @@
 package com.johnduq.microappservice.model.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,8 +20,9 @@ import lombok.Setter;
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRole {
+public class UserRole implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	@Id @Column
 	private Integer idUserRole;
 	@ManyToOne(fetch=FetchType.LAZY)
