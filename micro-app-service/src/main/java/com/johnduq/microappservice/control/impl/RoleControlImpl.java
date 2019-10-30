@@ -42,4 +42,14 @@ public class RoleControlImpl implements IRoleControl {
 		return role;
 	}
 
+	@Override
+	public List<Role> findRoleByIdUser(Integer idUser) {
+		return roleDAO.findByIdUser(idUser);
+	}
+
+	@Override
+	public List<Role> findAvaibleRolesByIdUser(Integer idUser) {
+		return roleDAO.findAvaibleRolesByIdUser(idUser);
+	}
+
 }

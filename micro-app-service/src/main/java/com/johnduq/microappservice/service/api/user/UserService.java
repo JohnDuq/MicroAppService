@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.johnduq.microappservice.control.IRoleControl;
 import com.johnduq.microappservice.control.IUserControl;
+import com.johnduq.microappservice.control.IUserRoleControl;
 import com.johnduq.microappservice.model.dto.Response;
 import com.johnduq.microappservice.model.entity.User;
 import com.johnduq.microappservice.service.config.GeneralPathValue;
@@ -34,6 +36,10 @@ public class UserService {
 
 	@Autowired
 	private IUserControl iUserControl;
+	@Autowired
+	private IRoleControl iRoleControl;
+	@Autowired
+	private IUserRoleControl iUserRoleControl;
 
 	@GetMapping(path = UserPathValue.USER)
 	@Secured({ Roles.ADMIN })
@@ -51,7 +57,10 @@ public class UserService {
 	@Secured({ Roles.ADMIN })
 	public Response findByIdUser(@PathVariable(name = "id") Integer idUser) {
 		try {
-			UserResponse userResponse = new UserResponse(iUserControl.findByIdUser(idUser));
+			UserTransaction userResponse = new UserTransaction();
+			userResponse.setUser(iUserControl.findByIdUser(idUser));
+			userResponse.setListRolesUser(iRoleControl.findRoleByIdUser(userResponse.getUser().getIdUser()));
+			userResponse.setListRolesAvaible(iRoleControl.findAvaibleRolesByIdUser(userResponse.getUser().getIdUser()));
 			return MessageUtil.addGenericSuccessMessage(userResponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -61,9 +70,13 @@ public class UserService {
 
 	@PostMapping(path = UserPathValue.USER)
 	@Secured({ Roles.ADMIN })
-	public Response postUser(@RequestBody User user) {
+	public Response postUser(@RequestBody UserTransaction userTransaction) {
 		try {
-			UserResponse userResponse = new UserResponse(iUserControl.save(user));
+			UserTransaction userResponse = new UserTransaction();
+			userResponse.setUser(iUserControl.save(userTransaction.getUser()));
+			iUserRoleControl.associateRolesToUser(userTransaction.getUser(), userTransaction.getListRolesUser());
+			userResponse.setListRolesUser(iRoleControl.findRoleByIdUser(userResponse.getUser().getIdUser()));
+			userResponse.setListRolesAvaible(iRoleControl.findAvaibleRolesByIdUser(userResponse.getUser().getIdUser()));
 			return MessageUtil.addGenericSuccessMessage(userResponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -75,7 +88,8 @@ public class UserService {
 	@Secured({ Roles.ADMIN })
 	public Response putUser(@RequestBody User user) {
 		try {
-			UserResponse userResponse = new UserResponse(iUserControl.save(user));
+			UserTransaction userResponse = new UserTransaction();
+			userResponse.setUser(iUserControl.save(user));
 			return MessageUtil.addGenericSuccessMessage(userResponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -87,7 +101,8 @@ public class UserService {
 	@Secured({ Roles.ADMIN })
 	public Response putUser(@PathVariable(name = "id") Integer idUser) {
 		try {
-			UserResponse userResponse = new UserResponse(iUserControl.delete(idUser));
+			UserTransaction userResponse = new UserTransaction();
+			userResponse.setUser(iUserControl.delete(idUser));
 			return MessageUtil.addGenericSuccessMessage(userResponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage());

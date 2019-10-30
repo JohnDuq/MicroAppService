@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 //////////////////PIMENG////////////////////
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputSwitchModule } from 'primeng/inputswitch';
@@ -23,6 +24,7 @@ import { UserComponent } from './authorization/user/user.component';
 import { BlockUIModule } from 'primeng/blockui';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { PickListModule } from 'primeng/picklist';
+import { AccordionModule } from 'primeng/accordion';
 
 //////
 import { HttpClientModule } from '@angular/common/http';
@@ -47,6 +49,7 @@ const routes: Routes = [
    imports: [
       FormsModule,
       BrowserModule,
+      BrowserAnimationsModule,
       RouterModule.forRoot(routes),
       HttpClientModule,
       ButtonModule,
@@ -55,7 +58,8 @@ const routes: Routes = [
       SelectButtonModule,
       BlockUIModule,
       ProgressBarModule,
-      PickListModule
+      PickListModule,
+      AccordionModule
    ],
    providers: [
       RoleService

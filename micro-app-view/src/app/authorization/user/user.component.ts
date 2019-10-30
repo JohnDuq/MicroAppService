@@ -2,6 +2,9 @@ import { UserGetResponse } from './../../model/UserGetResponse';
 import { UserService } from './user.service';
 import { User } from './../../model/User';
 import { Component, OnInit } from '@angular/core';
+import { UserResponse } from 'src/app/model/UserResponse';
+import { RoleService } from '../role/role.service';
+import { Role } from 'src/app/model/Role';
 
 @Component({
   selector: 'app-user',
@@ -9,14 +12,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  userSelected: User;
+  idUserSelectedDisable: boolean;
+  userSelected: UserResponse;
   listUsers: User[];
-  checked: boolean;
-  constructor(private userService: UserService) { }
+
+  constructor(private userService: UserService, private roleService: RoleService) { }
 
   ngOnInit() {
-    this.userSelected = new User();
+    this.clean();
     this.getListUsers();
+  }
+
+  public clean(): void {
+    this.userSelected = new UserResponse();
+    this.userSelected.user = new User();
+    this.getListRole();
+    this.userSelected.listRolesUser = new Array();
+    this.idUserSelectedDisable = false;
   }
 
   public getListUsers(): void {
@@ -25,12 +37,32 @@ export class UserComponent implements OnInit {
     );
   }
 
+  public saveUser(): void {
+    if (this.userSelected.user.statusBool) {
+      this.userSelected.user.status = 'ENABLE';
+    } else {
+      this.userSelected.user.status = 'DISABLE';
+    }
+    this.userService.postUser(this.userSelected).subscribe(
+      (response) => {
+        this.userSelected = response;
+      }
+    );
+  }
+
   public editUser(user: User): void {
-    this.userSelected = new User();
-    this.userSelected.idUser = user.idUser;
-    this.userSelected.username = user.username;
-    this.userSelected.status = user.status;
-    this.userSelected.statusBool = user.status == 'ENABLE';
+    this.idUserSelectedDisable = true;
+    this.userService.getUser(user).subscribe(
+      (response) => {
+        this.userSelected = response;
+      }
+    );
+  }
+
+  public getListRole(): void {
+    this.roleService.getRoles().subscribe(
+      (response) => this.userSelected.listRolesAvaible = response.listRoles
+    );
   }
 
 }
