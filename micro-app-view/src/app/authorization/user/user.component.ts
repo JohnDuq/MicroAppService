@@ -1,3 +1,4 @@
+import { MessageUtil } from './../../util/MessageUtil';
 import { UserGetResponse } from './../../model/UserGetResponse';
 import { UserService } from './user.service';
 import { User } from './../../model/User';
@@ -5,18 +6,27 @@ import { Component, OnInit } from '@angular/core';
 import { UserResponse } from 'src/app/model/UserResponse';
 import { RoleService } from '../role/role.service';
 import { Role } from 'src/app/model/Role';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 @Component({
   selector: 'app-user',
-  templateUrl: './user.component.html'
+  templateUrl: './user.component.html',
+  providers: [MessageService]
 })
 export class UserComponent implements OnInit {
 
+  messageUtil: MessageUtil = new MessageUtil();
+  blockedDocument: boolean = false;
   idUserSelectedDisable: boolean;
+  userValidateSave: boolean;
   userSelected: UserResponse;
   listUsers: User[];
 
-  constructor(private userService: UserService, private roleService: RoleService) { }
+  constructor(
+    private userService: UserService,
+    private roleService: RoleService,
+    private messageService: MessageService
+    ) { }
 
   ngOnInit() {
     this.clean();
@@ -38,16 +48,45 @@ export class UserComponent implements OnInit {
   }
 
   public saveUser(): void {
-    if (this.userSelected.user.statusBool) {
-      this.userSelected.user.status = 'ENABLE';
-    } else {
-      this.userSelected.user.status = 'DISABLE';
-    }
-    this.userService.postUser(this.userSelected).subscribe(
+    this.blockedDocument = true;
+    this.userValidateSave = true;
+    this.userService.getUserByUsername(this.userSelected.user).subscribe(
       (response) => {
-        this.userSelected = response;
+        let userFindUsername = response.user;
+        if (this.userSelected.user.idUser == null
+          || this.userSelected.user.idUser == undefined) { //NEW USER
+          if (userFindUsername != null && userFindUsername != undefined) {
+            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Usuario Existente' });
+            this.userValidateSave = false;
+          }
+        } else { //USER EXIST
+          if (userFindUsername != null && userFindUsername != undefined) {
+            if (userFindUsername.idUser != this.userSelected.user.idUser) {
+              this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Usuario Existente' });
+              this.userValidateSave = false;
+            }
+          }
+        }
+
+        if (this.userValidateSave) {
+          if (this.userSelected.user.statusBool) {
+            this.userSelected.user.status = 'ENABLE';
+          } else {
+            this.userSelected.user.status = 'DISABLE';
+          }
+          this.userService.postUser(this.userSelected).subscribe(
+            (response) => {
+              this.userSelected = response;
+              this.messageUtil.showMessagesResponse(this.messageService, response);
+              this.getListUsers();
+            }
+          );
+        }
+        this.blockedDocument = false;
       }
     );
+
+
   }
 
   public editUser(user: User): void {

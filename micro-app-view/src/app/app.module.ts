@@ -25,6 +25,8 @@ import { BlockUIModule } from 'primeng/blockui';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { PickListModule } from 'primeng/picklist';
 import { AccordionModule } from 'primeng/accordion';
+import { ToastModule } from 'primeng/toast';
+import { InputMaskModule } from 'primeng/inputmask';
 
 //////
 import { HttpClientModule } from '@angular/common/http';
@@ -59,7 +61,9 @@ const routes: Routes = [
       BlockUIModule,
       ProgressBarModule,
       PickListModule,
-      AccordionModule
+      AccordionModule,
+      ToastModule,
+      InputMaskModule
    ],
    providers: [
       RoleService

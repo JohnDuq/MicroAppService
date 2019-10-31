@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.johnduq.microappservice.control.IUserRoleControl;
 import com.johnduq.microappservice.model.dao.UserRoleDAO;
@@ -17,6 +18,7 @@ public class UserRoleControlImpl implements IUserRoleControl {
 	@Autowired
 	private UserRoleDAO userRoleDAO;
 
+	@Transactional
 	@Override
 	public void associateRolesToUser(User user, List<Role> listRoles) {
 		userRoleDAO.deleteUserRoleOld(user.getIdUser());

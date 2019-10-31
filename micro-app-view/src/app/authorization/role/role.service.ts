@@ -12,7 +12,7 @@ export class RoleService {
 
   private headerAuth = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJhdXRob3JpdGllcyI6Ilt7XCJhdXRob3JpdHlcIjpcIlJPTEVfQURNSU5cIn1dIiwic3ViIjoiUk9PVCIsImlhdCI6MTU3MjQ1MDI0MywiZXhwIjoxNTcyNDkzNDQzfQ.6svP1YqYBea9Jo6NHYkSbAah1rppwjY48SpBTFT3iL2_AgfeHhUP2qZrdellGcYf'
+    'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJhdXRob3JpdGllcyI6Ilt7XCJhdXRob3JpdHlcIjpcIlJPTEVfQURNSU5cIn1dIiwic3ViIjoiUk9PVCIsImlhdCI6MTU3MjUzMDAzNSwiZXhwIjoxNTcyNTczMjM1fQ.jvZ9ziYLLyMyHM7RJmJJkB7II8ZlwRCm8cXQUlnQc7PkEznFvgDXywJBbquXPKlZ'
   });
 
   constructor(private http: HttpClient) { }

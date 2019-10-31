@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/model/User';
 import { UserResponse } from 'src/app/model/UserResponse';
+import { IfStmt } from '@angular/compiler';
 
 const urlEndPoint = "http://localhost:8080/api/microappservice/user";
 
@@ -15,7 +16,7 @@ export class UserService {
 
   private headerAuth = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJhdXRob3JpdGllcyI6Ilt7XCJhdXRob3JpdHlcIjpcIlJPTEVfQURNSU5cIn1dIiwic3ViIjoiUk9PVCIsImlhdCI6MTU3MjQ1MDI0MywiZXhwIjoxNTcyNDkzNDQzfQ.6svP1YqYBea9Jo6NHYkSbAah1rppwjY48SpBTFT3iL2_AgfeHhUP2qZrdellGcYf'
+    'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJhdXRob3JpdGllcyI6Ilt7XCJhdXRob3JpdHlcIjpcIlJPTEVfQURNSU5cIn1dIiwic3ViIjoiUk9PVCIsImlhdCI6MTU3MjUzMDAzNSwiZXhwIjoxNTcyNTczMjM1fQ.jvZ9ziYLLyMyHM7RJmJJkB7II8ZlwRCm8cXQUlnQc7PkEznFvgDXywJBbquXPKlZ'
   });
 
   constructor(private http: HttpClient) { }
@@ -52,6 +53,27 @@ export class UserService {
         map(response => {
           let userResponse = response as UserResponse;
           userResponse.user.statusBool = (userResponse.user.status == 'ENABLE' ? true : false);
+          return userResponse;
+        })
+      );
+  }
+
+
+
+  getUserByUsername(user: User): Observable<UserResponse> {
+    return this.http.get<UserResponse>
+      (urlEndPoint + "/" + user.username + "/findByUsername",
+        {
+          headers: this.headerAuth,
+          responseType: 'json',
+          withCredentials: true
+        }
+      ).pipe(
+        map(response => {
+          let userResponse = response as UserResponse;
+          if (userResponse.user != null) {
+            userResponse.user.statusBool = (userResponse.user.status == 'ENABLE' ? true : false);
+          }
           return userResponse;
         })
       );

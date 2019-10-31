@@ -1,5 +1,7 @@
 package com.johnduq.microappservice.service.api.user;
 
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,6 @@ import com.johnduq.microappservice.util.MessageUtil;
 import com.johnduq.microappservice.util.OriginValid;
 import com.johnduq.microappservice.util.Roles;
 import com.johnduq.microappservice.util.TypeConsume;
-
 
 @RestController
 @CrossOrigin(origins = OriginValid.HTTP_LOCALHOST_4200)
@@ -59,8 +60,27 @@ public class UserService {
 		try {
 			UserTransaction userResponse = new UserTransaction();
 			userResponse.setUser(iUserControl.findByIdUser(idUser));
-			userResponse.setListRolesUser(iRoleControl.findRoleByIdUser(userResponse.getUser().getIdUser()));
-			userResponse.setListRolesAvaible(iRoleControl.findAvaibleRolesByIdUser(userResponse.getUser().getIdUser()));
+			userResponse.setListRolesUser(userResponse.getUser() == null ? new ArrayList()
+					: iRoleControl.findRoleByIdUser(userResponse.getUser().getIdUser()));
+			userResponse.setListRolesAvaible(userResponse.getUser() == null ? new ArrayList()
+					: iRoleControl.findAvaibleRolesByIdUser(userResponse.getUser().getIdUser()));
+			return MessageUtil.addGenericSuccessMessage(userResponse);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return MessageUtil.addGenericErrorMessage(new Response());
+		}
+	}
+
+	@GetMapping(path = UserPathValue.USER_USERNAME)
+	@Secured({ Roles.ADMIN })
+	public Response findByIdUser(@PathVariable(name = "username") String username) {
+		try {
+			UserTransaction userResponse = new UserTransaction();
+			userResponse.setUser(iUserControl.findByUsername(username));
+			userResponse.setListRolesUser(userResponse.getUser() == null ? new ArrayList()
+					: iRoleControl.findRoleByIdUser(userResponse.getUser().getIdUser()));
+			userResponse.setListRolesAvaible(userResponse.getUser() == null ? new ArrayList()
+					: iRoleControl.findAvaibleRolesByIdUser(userResponse.getUser().getIdUser()));
 			return MessageUtil.addGenericSuccessMessage(userResponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
