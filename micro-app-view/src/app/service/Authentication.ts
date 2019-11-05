@@ -26,7 +26,6 @@ export class AuthenticationService {
       (urlLogin, userLogin
       ).pipe(
         map(response => {
-          console.log(response);
           let loginResponse = response as LoginResponse;
           return loginResponse;
         })
@@ -35,21 +34,17 @@ export class AuthenticationService {
 
   isUserLoggedIn() {
     let username = sessionStorage.getItem('username');
-    let token = sessionStorage.getItem('token');
-    console.log(username);
-    console.log(token);
+    let token = sessionStorage.getItem('Authorization');
     if (username != null && username != 'null' && token != null && token != 'null') {
-      console.log('return true');
       return true;
     } else {
-      console.log('return false');
       this.logOut();
       return false;
     }
   }
 
   logOut() {
-    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('Authorization');
     sessionStorage.removeItem('username');
   }
 

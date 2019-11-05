@@ -1,3 +1,5 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<p-blockUI [blocked]="blockedDocument"></p-blockUI>
 <div class="card border-info mb-3 shadow">
     <div class="card-body text-info">
         <div class="container">
@@ -31,7 +33,7 @@
                     <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-success"
                         (click)="checkLogin()" label="Login" icon="pi pi-check"></button>
                     <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Clean"
-                        icon="pi pi-refresh"></button>
+                        (click)="clean()" icon="pi pi-refresh"></button>
                 </div>
             </div>
         </div>

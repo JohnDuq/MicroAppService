@@ -1,3 +1,4 @@
+import { BasicAuthHtppInterceptorService } from './service/BasicAuthHtppInterceptorService';
 import { AuthGaurdService } from './service/AuthGaurdService';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -31,15 +32,15 @@ import { ToastModule } from 'primeng/toast';
 import { InputMaskModule } from 'primeng/inputmask';
 
 //////
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthorizationComponent } from './authorization/authorization.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo:'/login', pathMatch: 'full'},
-  {path: 'login', component: LoginComponent},
-  {path: 'home', component: HomeComponent, canActivate:[AuthGaurdService]},
-  {path: 'auth', component: AuthorizationComponent, canActivate:[AuthGaurdService]}
+   { path: '', redirectTo: '/login', pathMatch: 'full' },
+   { path: 'login', component: LoginComponent },
+   { path: 'home', component: HomeComponent, canActivate: [AuthGaurdService] },
+   { path: 'auth', component: AuthorizationComponent, canActivate: [AuthGaurdService] }
 ];
 
 @NgModule({
@@ -71,7 +72,10 @@ const routes: Routes = [
       InputMaskModule
    ],
    providers: [
-      RoleService
+      RoleService,
+      {
+         provide: HTTP_INTERCEPTORS, useClass: BasicAuthHtppInterceptorService, multi: true
+      }
    ],
    bootstrap: [
       AppComponent
