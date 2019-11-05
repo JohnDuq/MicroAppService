@@ -8,11 +8,11 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
     title: string = 'Micro-App-View';
-    user: string;
+    user: string = sessionStorage.getItem('username');
     constructor(private router: Router,private loginService: AuthenticationService) { }
 
     ngOnInit() {
-        this.user = sessionStorage.getItem('username');
+        
     }
 
     logOut(): void {

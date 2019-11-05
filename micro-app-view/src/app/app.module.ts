@@ -40,7 +40,7 @@ import { AboutComponent } from './about/about.component';
 const routes: Routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
    { path: 'login', component: LoginComponent },
-   { path: 'home', component: HomeComponent, canActivate: [AuthGaurdService] },
+   { path: 'home', component: HomeComponent, canActivate: [AuthGaurdService], pathMatch: 'full'},
    { path: 'auth', component: AuthorizationComponent, canActivate: [AuthGaurdService] },
    { path: 'about', component: AboutComponent}
 ];
