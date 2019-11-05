@@ -16,7 +16,11 @@ public interface UserDAO extends CrudRepository<User, Integer>{
 	@Query("SELECT usr FROM User usr WHERE usr.idUser = :idUser")
 	User findByIdUser(@Param("idUser") Integer idUser);
 	
+	
 	@Query("SELECT usr FROM User usr WHERE usr.username = :username")
 	User findByUser(@Param("username") String username);
+	
+	@Query("SELECT usr FROM User usr WHERE usr.username = :username AND usr.status = :status")
+	User findByUserAndStatus(@Param("username") String username, @Param("status") String status);
 	
 }

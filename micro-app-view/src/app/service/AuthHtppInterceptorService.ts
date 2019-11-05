@@ -5,7 +5,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http'
     providedIn: 'root'
 })
 
-export class BasicAuthHtppInterceptorService implements HttpInterceptor {
+export class AuthHtppInterceptorService implements HttpInterceptor {
 
     constructor() { }
 

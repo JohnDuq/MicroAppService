@@ -12,10 +12,6 @@ const urlLogin = 'http://localhost:8080/api/microappservice/login';
 })
 export class AuthenticationService {
 
-  private headerAuth = new HttpHeaders({
-    'Content-Type': 'application/json'
-  });
-
   constructor(private http: HttpClient) { }
 
   authenticate(username, password): Observable<LoginResponse> {

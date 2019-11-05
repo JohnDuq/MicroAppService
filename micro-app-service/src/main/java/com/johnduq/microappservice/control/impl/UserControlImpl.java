@@ -27,6 +27,11 @@ public class UserControlImpl implements IUserControl {
 	public User findByUsername(String user) {
 		return userDAO.findByUser(user);
 	}
+	
+	@Override
+	public User findByUserAndStatus(String username, String status) {
+		return userDAO.findByUserAndStatus(username, status);
+	}
 
 	@Override
 	public User findByIdUser(Integer idUser) {

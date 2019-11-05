@@ -1,4 +1,4 @@
-import { BasicAuthHtppInterceptorService } from './service/BasicAuthHtppInterceptorService';
+import { AuthHtppInterceptorService } from './service/AuthHtppInterceptorService';
 import { AuthGaurdService } from './service/AuthGaurdService';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -74,7 +74,7 @@ const routes: Routes = [
    providers: [
       RoleService,
       {
-         provide: HTTP_INTERCEPTORS, useClass: BasicAuthHtppInterceptorService, multi: true
+         provide: HTTP_INTERCEPTORS, useClass: AuthHtppInterceptorService, multi: true
       }
    ],
    bootstrap: [
