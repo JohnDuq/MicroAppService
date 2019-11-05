@@ -15,7 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import com.johnduq.microappservice.service.api.auth.IJWTService;
-import com.johnduq.microappservice.service.api.role.RoleService;
 import com.johnduq.microappservice.util.TypeAuthValues;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {

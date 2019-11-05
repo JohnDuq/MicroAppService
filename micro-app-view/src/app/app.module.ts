@@ -34,13 +34,15 @@ import { InputMaskModule } from 'primeng/inputmask';
 //////
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthorizationComponent } from './authorization/authorization.component';
+import { AboutComponent } from './about/about.component';
 
 
 const routes: Routes = [
    { path: '', redirectTo: '/login', pathMatch: 'full' },
    { path: 'login', component: LoginComponent },
    { path: 'home', component: HomeComponent, canActivate: [AuthGaurdService] },
-   { path: 'auth', component: AuthorizationComponent, canActivate: [AuthGaurdService] }
+   { path: 'auth', component: AuthorizationComponent, canActivate: [AuthGaurdService] },
+   { path: 'about', component: AboutComponent}
 ];
 
 @NgModule({
@@ -52,7 +54,8 @@ const routes: Routes = [
       RoleComponent,
       UserComponent,
       AuthorizationComponent,
-      LoginComponent
+      LoginComponent,
+      AboutComponent
    ],
    imports: [
       FormsModule,
