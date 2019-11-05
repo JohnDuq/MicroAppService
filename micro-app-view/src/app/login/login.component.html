@@ -1,0 +1,39 @@
+<div class="card border-info mb-3 shadow">
+    <div class="card-body text-info">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text text-info" id="basic-addon3">Username</span>
+                        </div>
+                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+                            [(ngModel)]="username">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text text-info" id="basic-addon3">Password</span>
+                        </div>
+                        <input type="password" class="form-control" id="basic-url" [(ngModel)]="password">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-success"
+                        (click)="checkLogin()" label="Login" icon="pi pi-check"></button>
+                    <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Clean"
+                        icon="pi pi-refresh"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

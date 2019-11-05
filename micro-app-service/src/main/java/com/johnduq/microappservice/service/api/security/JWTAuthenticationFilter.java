@@ -76,6 +76,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		Map<String, Object> body = new HashMap<String, Object>();
 		body.put(TypeAuthValues.TOKEN.getCode(), tokenJWT);
 		body.put(TypeAuthValues.USER.getCode(), authentication.getName());
+		body.put(TypeMessage.ERROR.getName(), null);
 
 		response.getWriter().write(JsonUtil.convertObjectToJson(body));
 		response.setStatus(200);
@@ -87,9 +88,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			AuthenticationException failed) throws IOException, ServletException {
 		Map<String, Object> body = new HashMap<String, Object>();
 		body.put(MICRO_APP_SERVICE, MessageUtil.addGenericErrorMessage(new Response()));
+		
+		body.put(TypeAuthValues.TOKEN.getCode(), null);
+		body.put(TypeAuthValues.USER.getCode(), null);
 		body.put(TypeMessage.ERROR.getName(), failed.getMessage());
+		
+		
 		response.getWriter().write(JsonUtil.convertObjectToJson(body));
-		response.setStatus(401);
+		response.setStatus(200);
 		response.setContentType(TypeContentWeb.APPLICATION_JSON.getCode());
 	}
 

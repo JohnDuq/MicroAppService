@@ -106,10 +106,13 @@ public class UserService {
 
 	@PutMapping(path = UserPathValue.USER)
 	@Secured({ Roles.ADMIN })
-	public Response putUser(@RequestBody User user) {
+	public Response putUser(@RequestBody UserTransaction userTransaction) {
 		try {
 			UserTransaction userResponse = new UserTransaction();
-			userResponse.setUser(iUserControl.save(user));
+			userResponse.setUser(iUserControl.save(userTransaction.getUser()));
+			iUserRoleControl.associateRolesToUser(userTransaction.getUser(), userTransaction.getListRolesUser());
+			userResponse.setListRolesUser(iRoleControl.findRoleByIdUser(userResponse.getUser().getIdUser()));
+			userResponse.setListRolesAvaible(iRoleControl.findAvaibleRolesByIdUser(userResponse.getUser().getIdUser()));
 			return MessageUtil.addGenericSuccessMessage(userResponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage());

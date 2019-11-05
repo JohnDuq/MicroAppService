@@ -21,7 +21,7 @@
                         </div>
                         <input type="text" class="form-control" id="basic-url"
                             [readonly]="userSelected.user.idUser == 1" [(ngModel)]="userSelected.user.username"
-                            aria-describedby="basic-addon3">
+                            aria-describedby="basic-addon3" required>
                     </div>
                 </div>
             </div>
@@ -32,11 +32,12 @@
                             <span class="input-group-text" id="basic-addon3">Password</span>
                         </div>
                         <input type="password" class="form-control" id="basic-url"
-                        [(ngModel)]="userSelected.user.password" aria-describedby="basic-addon3">
+                            [(ngModel)]="userSelected.user.password" aria-describedby="basic-addon3">
                     </div>
                 </div>
                 <div class="col">
-                    <p-inputSwitch [(ngModel)]="userSelected.user.statusBool" [readonly]="userSelected.user.idUser == 1">
+                    <p-inputSwitch [(ngModel)]="userSelected.user.statusBool"
+                        [readonly]="userSelected.user.idUser == 1">
                     </p-inputSwitch>
                 </div>
             </div>
@@ -63,8 +64,7 @@
             <div class="row">
                 <div class="col">
                     <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-success"
-                        (click)="saveUser()"
-                        [disabled]="userSelected.user.idUser == 1" label="Save" icon="pi pi-check"></button>
+                        (click)="saveUser()" label="Save" icon="pi pi-check"></button>
                     <button pButton type="button" class="ui-button-raised ui-button-rounded" (click)="clean()"
                         label="Clean" icon="pi pi-refresh"></button>
                     <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-danger"

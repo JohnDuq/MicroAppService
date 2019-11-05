@@ -1,3 +1,4 @@
+import { AuthGaurdService } from './service/AuthGaurdService';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -5,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './template/header/header.component';
 import { HomeComponent } from './template/home/home.component';
+import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './template/footer/footer.component';
 import { RoleComponent } from './authorization/role/role.component';
 
@@ -32,10 +34,12 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthorizationComponent } from './authorization/authorization.component';
 
+
 const routes: Routes = [
-  {path: '', redirectTo:'/home', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent},
-  {path: 'auth', component: AuthorizationComponent}
+  {path: '', redirectTo:'/login', pathMatch: 'full'},
+  {path: 'login', component: LoginComponent},
+  {path: 'home', component: HomeComponent, canActivate:[AuthGaurdService]},
+  {path: 'auth', component: AuthorizationComponent, canActivate:[AuthGaurdService]}
 ];
 
 @NgModule({
@@ -46,7 +50,8 @@ const routes: Routes = [
       FooterComponent,
       RoleComponent,
       UserComponent,
-      AuthorizationComponent
+      AuthorizationComponent,
+      LoginComponent
    ],
    imports: [
       FormsModule,

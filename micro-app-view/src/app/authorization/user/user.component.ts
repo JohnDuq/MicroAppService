@@ -26,7 +26,7 @@ export class UserComponent implements OnInit {
     private userService: UserService,
     private roleService: RoleService,
     private messageService: MessageService
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.clean();
@@ -50,41 +50,58 @@ export class UserComponent implements OnInit {
   public saveUser(): void {
     this.blockedDocument = true;
     this.userValidateSave = true;
-    this.userService.getUserByUsername(this.userSelected.user).subscribe(
-      (response) => {
-        let userFindUsername = response.user;
-        if (this.userSelected.user.idUser == null
-          || this.userSelected.user.idUser == undefined) { //NEW USER
-          if (userFindUsername != null && userFindUsername != undefined) {
-            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Usuario Existente' });
-            this.userValidateSave = false;
-          }
-        } else { //USER EXIST
-          if (userFindUsername != null && userFindUsername != undefined) {
-            if (userFindUsername.idUser != this.userSelected.user.idUser) {
+    if (this.userSelected.user.username == null
+      || this.userSelected.user.username == undefined
+      || this.userSelected.user.username == '') {
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'User cant be empty' });
+      this.blockedDocument = false;
+    } else {
+      this.userService.getUserByUsername(this.userSelected.user).subscribe(
+        (response) => {
+          let userFindUsername = response.user;
+          if (this.userSelected.user.idUser == null
+            || this.userSelected.user.idUser == undefined) { //NEW USER
+            if (userFindUsername != null && userFindUsername != undefined) {
               this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Usuario Existente' });
               this.userValidateSave = false;
             }
-          }
-        }
-
-        if (this.userValidateSave) {
-          if (this.userSelected.user.statusBool) {
-            this.userSelected.user.status = 'ENABLE';
-          } else {
-            this.userSelected.user.status = 'DISABLE';
-          }
-          this.userService.postUser(this.userSelected).subscribe(
-            (response) => {
-              this.userSelected = response;
-              this.messageUtil.showMessagesResponse(this.messageService, response);
-              this.getListUsers();
+          } else { //USER EXIST
+            if (userFindUsername != null && userFindUsername != undefined) {
+              if (userFindUsername.idUser != this.userSelected.user.idUser) {
+                this.messageUtil.showMessageError(this.messageService, 'Username exist');
+                this.userValidateSave = false;
+              }
             }
-          );
+          }
+
+          if (this.userSelected.user.password == null || this.userSelected.user.password == '') {
+            this.messageUtil.showMessageError(this.messageService, 'Password cant be empty');
+            this.userValidateSave = false;
+          }
+
+          if (this.userSelected.listRolesUser == null || this.userSelected.user.password == '') {
+            this.messageUtil.showMessageError(this.messageService, 'Password cant be empty');
+            this.userValidateSave = false;
+          }
+
+          if (this.userValidateSave) {
+            if (this.userSelected.user.statusBool) {
+              this.userSelected.user.status = 'ENABLE';
+            } else {
+              this.userSelected.user.status = 'DISABLE';
+            }
+            this.userService.postUser(this.userSelected).subscribe(
+              (response) => {
+                this.userSelected = response;
+                this.messageUtil.showMessagesResponse(this.messageService, response);
+                this.getListUsers();
+              }
+            );
+          }
+          this.blockedDocument = false;
         }
-        this.blockedDocument = false;
-      }
-    );
+      );
+    }
 
 
   }

@@ -16,7 +16,7 @@ export class UserService {
 
   private headerAuth = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJhdXRob3JpdGllcyI6Ilt7XCJhdXRob3JpdHlcIjpcIlJPTEVfQURNSU5cIn1dIiwic3ViIjoiUk9PVCIsImlhdCI6MTU3MjUzMDAzNSwiZXhwIjoxNTcyNTczMjM1fQ.jvZ9ziYLLyMyHM7RJmJJkB7II8ZlwRCm8cXQUlnQc7PkEznFvgDXywJBbquXPKlZ'
+    'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJhdXRob3JpdGllcyI6Ilt7XCJhdXRob3JpdHlcIjpcIlJPTEVfQURNSU5cIn1dIiwic3ViIjoiUk9PVCIsImlhdCI6MTU3MjYxNTU1NiwiZXhwIjoxNTcyNjU4NzU2fQ.b0NO5UGdBYbe4hea2geRz7TqwhbR9dBXJwOJMcIMd3jlE9-0UxU5XnzFaiED9dA0'
   });
 
   constructor(private http: HttpClient) { }
