@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.johnduq.microappservice.control.IUserControl;
 import com.johnduq.microappservice.model.dao.UserDAO;
+import com.johnduq.microappservice.model.dao.UserRoleDAO;
 import com.johnduq.microappservice.model.entity.User;
 import com.johnduq.microappservice.util.BCryptUtil;
 
@@ -15,6 +16,8 @@ public class UserControlImpl implements IUserControl {
 
 	@Autowired
 	private UserDAO userDAO;
+	@Autowired
+	private UserRoleDAO userRoleDAO;
 	@Autowired
 	private BCryptUtil bCryptUtil;
 
@@ -53,6 +56,7 @@ public class UserControlImpl implements IUserControl {
 
 	@Override
 	public User delete(Integer idUser) {
+		userRoleDAO.deleteUserRoleByIdUser(idUser);
 		User user = userDAO.findByIdUser(idUser);
 		userDAO.delete(user);
 		return user;

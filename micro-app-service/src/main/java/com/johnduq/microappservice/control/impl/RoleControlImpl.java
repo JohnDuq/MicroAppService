@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.johnduq.microappservice.control.IRoleControl;
 import com.johnduq.microappservice.model.dao.RoleDAO;
+import com.johnduq.microappservice.model.dao.UserRoleDAO;
 import com.johnduq.microappservice.model.entity.Role;
 
 @Service
@@ -14,6 +15,8 @@ public class RoleControlImpl implements IRoleControl {
 
 	@Autowired
 	private RoleDAO roleDAO;
+	@Autowired
+	private UserRoleDAO userRoleDAO;
 	
 	@Override
 	public List<Role> findAll() {
@@ -37,6 +40,7 @@ public class RoleControlImpl implements IRoleControl {
 
 	@Override
 	public Role delete(Integer idRole) {
+		userRoleDAO.deleteUserRoleByIdRole(idRole);
 		Role role = roleDAO.findByIdRole(idRole);
 		roleDAO.delete(role);
 		return role;
