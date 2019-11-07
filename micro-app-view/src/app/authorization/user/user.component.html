@@ -1,8 +1,10 @@
 <form #userForm="ngForm">
-    <div class="card border-info mb-3 shadow">
-        <div class="card-header">Admin</div>
+    <div class="card border-light mb-3 shadow">
         <div class="card-body text-info">
             <div class="container">
+                <div class="row">
+                    <div class="col text-info bold h5">Admin</div>
+                </div>
                 <div class="row">
                     <div class="col">
                         <div class="input-group mb-3">
@@ -18,8 +20,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon3">Username</span>
                             </div>
-                            <input type="text" class="form-control" id="nameUser" name="nameUser"
-                                #userName="ngModel" name="userName"
+                            <input type="text" class="form-control" id="nameUser" name="nameUser" #userName="ngModel"
+                                name="userName"
                                 [ngClass]="{'is-valid': !userName.invalid, 'is-invalid': userName.invalid && (userName.dirty || userName.touched)}"
                                 pattern="[a-zA-Z]*" required minlength="4" maxlength="30"
                                 [readonly]="userSelected.user.idUser == 1" [(ngModel)]="userSelected.user.username"
@@ -76,11 +78,11 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <p-pickList id="roleUserList" name="roleUserList" [source]="userSelected.listRolesAvaible" [target]="userSelected.listRolesUser"
-                            [responsive]="true" filterBy="idRole,name" [showSourceControls]="false"
-                            [showSourceFilter]="false" [showTargetFilter]="false" [showTargetControls]="false"
-                            sourceHeader="Roles available" targetHeader="User roles" dragdrop="true"
-                            [disabled]="userSelected.user.idUser == 1"
+                        <p-pickList id="roleUserList" name="roleUserList" [source]="userSelected.listRolesAvaible"
+                            [target]="userSelected.listRolesUser" [responsive]="true" filterBy="idRole,name"
+                            [showSourceControls]="false" [showSourceFilter]="false" [showTargetFilter]="false"
+                            [showTargetControls]="false" sourceHeader="Roles available" targetHeader="User roles"
+                            dragdrop="true" [disabled]="userSelected.user.idUser == 1"
                             sourceFilterPlaceholder="Search by Role id or Name"
                             targetFilterPlaceholder="Search by Role id or Name">
                             <ng-template let-roleUser pTemplate="item">
@@ -99,21 +101,22 @@
                     <div class="col">
                         <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-success"
                             (click)="saveUser(userForm);" label="Save" icon="pi pi-check"></button>
-                        <button pButton type="reset" class="ui-button-raised ui-button-rounded" (click)="userForm.reset();clean();"
-                            label="Clean" icon="pi pi-refresh"></button>
+                        <button pButton type="reset" class="ui-button-raised ui-button-rounded"
+                            (click)="userForm.reset();clean();" label="Clean" icon="pi pi-refresh"></button>
                         <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-danger"
                             [disabled]="userSelected.user.idUser == null || userSelected.user.idUser == 1"
-                            (click)="deleteUser();userForm.reset();"
-                            label="Delete" icon="pi pi-trash"></button>
+                            (click)="deleteUser();userForm.reset();" label="Delete" icon="pi pi-trash"></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="card border-info mb-3 shadow">
-        <div class="card-header">List</div>
+    <div class="card border-light mb-3 shadow">
         <div class="card-body text-info">
             <div class="container">
+                <div class="row">
+                    <div class="col text-info bold h5">List</div>
+                </div>
                 <table class="table table-striped">
                     <thead>
                         <tr class="table-info">
@@ -128,15 +131,17 @@
                             <td>{{ user.idUser }}</td>
                             <td>{{ user.username }}</td>
                             <td>
-                                <p-inputSwitch id="statusUserList{{ user.idUser }}" name="statusUserList{{ user.idUser }}" readonly="true" [(ngModel)]="user.statusBool"></p-inputSwitch>
+                                <p-inputSwitch id="statusUserList{{ user.idUser }}"
+                                    name="statusUserList{{ user.idUser }}" readonly="true"
+                                    [(ngModel)]="user.statusBool"></p-inputSwitch>
                             </td>
                             <td>
                                 <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Edit"
                                     (click)="editUser(user);" icon="pi pi-pencil"></button>
                                 <button pButton type="button"
                                     class="ui-button-raised ui-button-rounded ui-button-danger"
-                                    (click)="userForm.reset();deleteUserList(user);"
-                                    [disabled]="user.idUser == 1" label="Delete" icon="pi pi-trash"></button>
+                                    (click)="userForm.reset();deleteUserList(user);" [disabled]="user.idUser == 1"
+                                    label="Delete" icon="pi pi-trash"></button>
                             </td>
                         </tr>
                     </tbody>

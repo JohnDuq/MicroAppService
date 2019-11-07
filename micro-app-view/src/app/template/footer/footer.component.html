@@ -1,8 +1,10 @@
 <div *ngIf="!loginService.isUserLoggedIn()">
-    <footer class="footer bg-info rounded-top text-center">
+    <footer class="footer bg-light rounded-top text-center">
         <div class="container py-2 ">
-            <p class="text-white my-2">
-                &copy; Author: {{ author }}
+            <p class="text-info my-2">
+                <img src="../../assets/images/twitter32.png" style="max-width: 32px;max-height: 32px;">
+                <img src="../../assets/images/instagram32.png" style="max-width: 32px;max-height: 32px;">
+                {{ author }}
             </p>
         </div>
     </footer>
