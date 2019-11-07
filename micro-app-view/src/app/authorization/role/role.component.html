@@ -1,5 +1,3 @@
-<p-progressBar mode="indeterminate" [style]="{'height': '6px'}" *ngIf="blockedDocument"></p-progressBar>
-<p-blockUI [blocked]="blockedDocument"></p-blockUI>
 <form #roleForm="ngForm">
     <div class="card border-info mb-3 shadow">
         <div class="card-header">Admin</div>
@@ -24,7 +22,7 @@
                                 [ngClass]="{'is-valid': !roleName.invalid, 'is-invalid': roleName.invalid && (roleName.dirty || roleName.touched)}"
                                 name="roleName" #roleName="ngModel" aria-describedby="basic-addon3"
                                 [readonly]="rolePrincipal.idRole == 1" required minlength="5" maxlength="20"
-                                pattern="[a-zA-Z_]*" [(ngModel)]="rolePrincipal.name">
+                                pattern="[a-zA-Z]*" [(ngModel)]="rolePrincipal.name">
                             <div class="valid-feedback"
                                 *ngIf="!(roleName.invalid && (roleName.dirty || roleName.touched))">
                                 Looks good
@@ -35,7 +33,7 @@
                                     Is required
                                 </div>
                                 <div *ngIf="roleName.errors.pattern">
-                                    Does not meet the pattern
+                                    Only alphabet characters
                                 </div>
                                 <div *ngIf="roleName.errors.minlength">
                                     Must have minimum 5 characters
@@ -63,11 +61,11 @@
                 <div class="row">
                     <div class="col">
                         <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-success"
-                            label="Save" icon="pi pi-check" (click)="saveRole()"
+                            label="Save" icon="pi pi-check" (click)="saveRole(roleForm);"
                             [disabled]="rolePrincipal.idRole == 1"></button>
-                        <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Clean"
+                        <button pButton type="reset" class="ui-button-raised ui-button-rounded" label="Clean"
                             icon="pi pi-refresh" (click)="roleForm.reset();clean();"></button>
-                        <button pButton type="reset" class="ui-button-raised ui-button-rounded ui-button-danger"
+                        <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-danger"
                             label="Delete" icon="pi pi-trash"
                             [disabled]="rolePrincipal.idRole == null || rolePrincipal.idRole == 1"
                             (click)="roleForm.reset();deleteRole();"></button>

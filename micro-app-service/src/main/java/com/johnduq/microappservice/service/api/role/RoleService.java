@@ -85,7 +85,7 @@ public class RoleService {
 
 	@DeleteMapping(path = RolePathValue.ROLE_ID)
 	@Secured({ Roles.ADMIN })
-	public Response putRole(@PathVariable(name = "id") Integer idRole) {
+	public Response deleteRole(@PathVariable(name = "id") Integer idRole) {
 		try {
 			RoleResponse roleResponse = new RoleResponse(iRoleControl.delete(idRole));
 			return MessageUtil.addGenericSuccessMessage(roleResponse);

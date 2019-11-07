@@ -87,4 +87,30 @@ export class UserService {
       );
   }
 
+  putUser(userResponse: UserResponse): Observable<UserResponse> {
+    return this.http.put<UserResponse>
+      (urlEndPoint, userResponse,
+        {
+          responseType: 'json',
+          withCredentials: true
+        }
+      ).pipe(
+        map(response => {
+          let userResponse = response as UserResponse;
+          userResponse.user.statusBool = (userResponse.user.status == 'ENABLE' ? true : false);
+          return userResponse;
+        })
+      );
+  }
+
+  deleteUser(user: User): Observable<UserResponse> {
+    return this.http.delete<UserResponse>
+      (urlEndPoint + '/' + user.idUser,
+        {
+          responseType: 'json',
+          withCredentials: true
+        }
+      );
+  }
+
 }

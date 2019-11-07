@@ -1,109 +1,147 @@
-<p-toast [style]="{marginTop: '80px'}"></p-toast>
-<p-blockUI [blocked]="blockedDocument"></p-blockUI>
-<div class="card border-info mb-3 shadow">
-    <div class="card-header">Admin</div>
-    <div class="card-body text-info">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon3">Id</span>
-                        </div>
-                        <input type="text" class="form-control" id="basic-url" [(ngModel)]="userSelected.user.idUser"
-                            disabled aria-describedby="basic-addon3">
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon3">Username</span>
-                        </div>
-                        <input type="text" class="form-control" id="basic-url"
-                            [readonly]="userSelected.user.idUser == 1" [(ngModel)]="userSelected.user.username"
-                            aria-describedby="basic-addon3" required>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon3">Password</span>
-                        </div>
-                        <input type="password" class="form-control" id="basic-url"
-                            [(ngModel)]="userSelected.user.password" aria-describedby="basic-addon3">
-                    </div>
-                </div>
-                <div class="col">
-                    <p-inputSwitch [(ngModel)]="userSelected.user.statusBool"
-                        [readonly]="userSelected.user.idUser == 1">
-                    </p-inputSwitch>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <p-pickList [source]="userSelected.listRolesAvaible" [target]="userSelected.listRolesUser"
-                        [responsive]="true" filterBy="idRole,name" [showSourceControls]="false"
-                        [showSourceFilter]="false" [showTargetFilter]="false" [showTargetControls]="false"
-                        sourceHeader="Roles available" targetHeader="User roles" dragdrop="true"
-                        [disabled]="userSelected.user.idUser == 1" sourceFilterPlaceholder="Search by Role id or Name"
-                        targetFilterPlaceholder="Search by Role id or Name">
-                        <ng-template let-roleUser pTemplate="item">
-                            <div class="ui-helper-clearfix">
-                                {{roleUser.idRole}} {{roleUser.name}}
+<form #userForm="ngForm">
+    <div class="card border-info mb-3 shadow">
+        <div class="card-header">Admin</div>
+        <div class="card-body text-info">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon3">Id</span>
                             </div>
-                        </ng-template>
-                    </p-pickList>
+                            <input type="text" class="form-control" id="idUser" name="idUser"
+                                [(ngModel)]="userSelected.user.idUser" disabled aria-describedby="basic-addon3">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon3">Username</span>
+                            </div>
+                            <input type="text" class="form-control" id="nameUser" name="nameUser"
+                                #userName="ngModel" name="userName"
+                                [ngClass]="{'is-valid': !userName.invalid, 'is-invalid': userName.invalid && (userName.dirty || userName.touched)}"
+                                pattern="[a-zA-Z]*" required minlength="4" maxlength="30"
+                                [readonly]="userSelected.user.idUser == 1" [(ngModel)]="userSelected.user.username"
+                                aria-describedby="basic-addon3" required>
+                            <div class="valid-feedback"
+                                *ngIf="!(userName.invalid && (userName.dirty || userName.touched))">
+                                Looks good
+                            </div>
+                            <div class="invalid-feedback"
+                                *ngIf="userName.invalid && (userName.dirty || userName.touched)">
+                                <div *ngIf="userName.errors.required">
+                                    Is required
+                                </div>
+                                <div *ngIf="userName.errors.pattern">
+                                    Only alphabet characters
+                                </div>
+                                <div *ngIf="userName.errors.minlength">
+                                    Must have minimum 4 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon3">Password</span>
+                            </div>
+                            <input type="password" class="form-control" id="passwordUser" name="passwordUser"
+                                #passwordUser="ngModel" required minlength="4" (click)="$event.target.select()"
+                                [ngClass]="{'is-valid': !passwordUser.invalid, 'is-invalid': passwordUser.invalid && (passwordUser.dirty || passwordUser.touched)}"
+                                [(ngModel)]="userSelected.user.password" aria-describedby="basic-addon3">
+                            <div class="valid-feedback"
+                                *ngIf="!(passwordUser.invalid && (passwordUser.dirty || passwordUser.touched))">
+                                Looks good
+                            </div>
+                            <div class="invalid-feedback"
+                                *ngIf="passwordUser.invalid && (passwordUser.dirty || passwordUser.touched)">
+                                <div *ngIf="passwordUser.errors.required">
+                                    Is required
+                                </div>
+                                <div *ngIf="passwordUser.errors.minlength">
+                                    Must have minimum 4 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <p-inputSwitch id="statusUser" name="statusUser" [(ngModel)]="userSelected.user.statusBool"
+                            [readonly]="userSelected.user.idUser == 1">
+                        </p-inputSwitch>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p-pickList id="roleUserList" name="roleUserList" [source]="userSelected.listRolesAvaible" [target]="userSelected.listRolesUser"
+                            [responsive]="true" filterBy="idRole,name" [showSourceControls]="false"
+                            [showSourceFilter]="false" [showTargetFilter]="false" [showTargetControls]="false"
+                            sourceHeader="Roles available" targetHeader="User roles" dragdrop="true"
+                            [disabled]="userSelected.user.idUser == 1"
+                            sourceFilterPlaceholder="Search by Role id or Name"
+                            targetFilterPlaceholder="Search by Role id or Name">
+                            <ng-template let-roleUser pTemplate="item">
+                                <div class="ui-helper-clearfix">
+                                    {{roleUser.idRole}} {{roleUser.name}}
+                                </div>
+                            </ng-template>
+                        </p-pickList>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-success"
+                            (click)="saveUser(userForm);" label="Save" icon="pi pi-check"></button>
+                        <button pButton type="reset" class="ui-button-raised ui-button-rounded" (click)="userForm.reset();clean();"
+                            label="Clean" icon="pi pi-refresh"></button>
+                        <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-danger"
+                            [disabled]="userSelected.user.idUser == null || userSelected.user.idUser == 1"
+                            (click)="deleteUser();userForm.reset();"
+                            label="Delete" icon="pi pi-trash"></button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="card-footer text-muted text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-success"
-                        (click)="saveUser()" label="Save" icon="pi pi-check"></button>
-                    <button pButton type="button" class="ui-button-raised ui-button-rounded" (click)="clean()"
-                        label="Clean" icon="pi pi-refresh"></button>
-                    <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-danger"
-                        [disabled]="userSelected.user.idUser == null || userSelected.user.idUser == 1" label="Delete"
-                        icon="pi pi-trash"></button>
-                </div>
+    <div class="card border-info mb-3 shadow">
+        <div class="card-header">List</div>
+        <div class="card-body text-info">
+            <div class="container">
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="table-info">
+                            <th>Id</th>
+                            <th>Username</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of listUsers">
+                            <td>{{ user.idUser }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>
+                                <p-inputSwitch id="statusUserList{{ user.idUser }}" name="statusUserList{{ user.idUser }}" readonly="true" [(ngModel)]="user.statusBool"></p-inputSwitch>
+                            </td>
+                            <td>
+                                <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Edit"
+                                    (click)="editUser(user);" icon="pi pi-pencil"></button>
+                                <button pButton type="button"
+                                    class="ui-button-raised ui-button-rounded ui-button-danger"
+                                    (click)="userForm.reset();deleteUserList(user);"
+                                    [disabled]="user.idUser == 1" label="Delete" icon="pi pi-trash"></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-</div>
-<div class="card border-info mb-3 shadow">
-    <div class="card-header">List</div>
-    <div class="card-body text-info">
-        <div class="container">
-            <table class="table table-striped">
-                <thead>
-                    <tr class="table-info">
-                        <th>Id</th>
-                        <th>Username</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let user of listUsers">
-                        <td>{{ user.idUser }}</td>
-                        <td>{{ user.username }}</td>
-                        <td>
-                            <p-inputSwitch readonly="true" [(ngModel)]="user.statusBool"></p-inputSwitch>
-                        </td>
-                        <td>
-                            <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Edit"
-                                (click)="editUser(user)" icon="pi pi-pencil"></button>
-                            <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-danger"
-                                [disabled]="user.idUser == 1" label="Delete" icon="pi pi-trash"></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+</form>

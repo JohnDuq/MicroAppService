@@ -1,12 +1,11 @@
-import { MessageUtil } from './../../util/MessageUtil';
-import { UserGetResponse } from './../../model/UserGetResponse';
+import { AppComponent } from './../../app.component';
 import { UserService } from './user.service';
 import { User } from './../../model/User';
 import { Component, OnInit } from '@angular/core';
 import { UserResponse } from 'src/app/model/UserResponse';
 import { RoleService } from '../role/role.service';
-import { Role } from 'src/app/model/Role';
 import { MessageService } from 'primeng/components/common/messageservice';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-user',
@@ -15,17 +14,14 @@ import { MessageService } from 'primeng/components/common/messageservice';
 })
 export class UserComponent implements OnInit {
 
-  messageUtil: MessageUtil = new MessageUtil();
-  blockedDocument: boolean = false;
-  idUserSelectedDisable: boolean;
   userValidateSave: boolean;
   userSelected: UserResponse;
   listUsers: User[];
 
   constructor(
+    private appComponent: AppComponent,
     private userService: UserService,
-    private roleService: RoleService,
-    private messageService: MessageService
+    private roleService: RoleService
   ) { }
 
   ngOnInit() {
@@ -37,8 +33,8 @@ export class UserComponent implements OnInit {
     this.userSelected = new UserResponse();
     this.userSelected.user = new User();
     this.getListRole();
+    this.getListUsers();
     this.userSelected.listRolesUser = new Array();
-    this.idUserSelectedDisable = false;
   }
 
   public getListUsers(): void {
@@ -47,70 +43,84 @@ export class UserComponent implements OnInit {
     );
   }
 
-  public saveUser(): void {
-    this.blockedDocument = true;
-    this.userValidateSave = true;
-    if (this.userSelected.user.username == null
-      || this.userSelected.user.username == undefined
-      || this.userSelected.user.username == '') {
-      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'User cant be empty' });
-      this.blockedDocument = false;
-    } else {
+  public saveUser(form: NgForm): void {
+    this.appComponent.blockDocument();
+    if (form.valid) {
+      this.userSelected.user.username = this.userSelected.user.username.toUpperCase();
+      this.userSelected.user.status = this.userSelected.user.statusBool ? 'ENABLE' : 'DISABLE';
       this.userService.getUserByUsername(this.userSelected.user).subscribe(
         (response) => {
           let userFindUsername = response.user;
           if (this.userSelected.user.idUser == null
             || this.userSelected.user.idUser == undefined) { //NEW USER
             if (userFindUsername != null && userFindUsername != undefined) {
-              this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Usuario Existente' });
-              this.userValidateSave = false;
+              this.appComponent.addMessageErrorSummary('Username already exist');
+            } else {
+              this.userService.postUser(this.userSelected).subscribe(
+                (responsePost: UserResponse) => {
+                  this.userSelected = responsePost;
+                  this.appComponent.showMessageResponse(responsePost);
+                  this.getListUsers();
+                }
+              );
             }
           } else { //USER EXIST
             if (userFindUsername != null && userFindUsername != undefined) {
               if (userFindUsername.idUser != this.userSelected.user.idUser) {
-                this.messageUtil.showMessageError(this.messageService, 'Username exist');
-                this.userValidateSave = false;
+                this.appComponent.addMessageErrorSummary('Username already exist');
+              } else {
+                this.userService.putUser(this.userSelected).subscribe(
+                  (responsePost: UserResponse) => {
+                    this.userSelected = responsePost;
+                    this.appComponent.showMessageResponse(responsePost);
+                    this.getListUsers();
+                  }
+                );
               }
-            }
-          }
-
-          if (this.userSelected.user.password == null || this.userSelected.user.password == '') {
-            this.messageUtil.showMessageError(this.messageService, 'Password cant be empty');
-            this.userValidateSave = false;
-          }
-
-          if (this.userSelected.listRolesUser == null || this.userSelected.user.password == '') {
-            this.messageUtil.showMessageError(this.messageService, 'Password cant be empty');
-            this.userValidateSave = false;
-          }
-
-          if (this.userValidateSave) {
-            if (this.userSelected.user.statusBool) {
-              this.userSelected.user.status = 'ENABLE';
             } else {
-              this.userSelected.user.status = 'DISABLE';
+              this.userService.putUser(this.userSelected).subscribe(
+                (responsePost: UserResponse) => {
+                  this.userSelected = responsePost;
+                  this.appComponent.showMessageResponse(responsePost);
+                  this.getListUsers();
+                }
+              );
             }
-            this.userService.postUser(this.userSelected).subscribe(
-              (response) => {
-                this.userSelected = response;
-                this.messageUtil.showMessagesResponse(this.messageService, response);
-                this.getListUsers();
-              }
-            );
           }
-          this.blockedDocument = false;
+          this.appComponent.unblockDocument();
         }
       );
     }
-
-
+    this.appComponent.unblockDocument();
   }
 
   public editUser(user: User): void {
-    this.idUserSelectedDisable = true;
     this.userService.getUser(user).subscribe(
-      (response) => {
+      (response: UserResponse) => {
         this.userSelected = response;
+      }
+    );
+  }
+
+  public deleteUser(): void {
+    console.log(this.userSelected);
+    this.appComponent.blockDocument();
+    this.userService.deleteUser(this.userSelected.user).subscribe(
+      (responsePost: UserResponse) => {
+        this.clean();
+        this.appComponent.unblockDocument();
+        this.appComponent.showMessageResponse(responsePost);
+      }
+    );
+  }
+
+  public deleteUserList(user: User): void {
+    this.appComponent.blockDocument();
+    this.userService.deleteUser(user).subscribe(
+      (responsePost: UserResponse) => {
+        this.clean();
+        this.appComponent.unblockDocument();
+        this.appComponent.showMessageResponse(responsePost);
       }
     );
   }

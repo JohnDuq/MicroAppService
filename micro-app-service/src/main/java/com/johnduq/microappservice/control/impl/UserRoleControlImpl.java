@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.johnduq.microappservice.control.IUserRoleControl;
+import com.johnduq.microappservice.model.dao.RoleDAO;
 import com.johnduq.microappservice.model.dao.UserRoleDAO;
 import com.johnduq.microappservice.model.entity.Role;
 import com.johnduq.microappservice.model.entity.User;
@@ -14,6 +15,9 @@ import com.johnduq.microappservice.model.entity.UserRole;
 
 @Service
 public class UserRoleControlImpl implements IUserRoleControl {
+
+	@Autowired
+	private RoleDAO roleDAO;
 
 	@Autowired
 	private UserRoleDAO userRoleDAO;
@@ -24,8 +28,11 @@ public class UserRoleControlImpl implements IUserRoleControl {
 		userRoleDAO.deleteUserRoleByIdUser(user.getIdUser());
 		UserRole userRole;
 		for (Role role : listRoles) {
-			userRole = new UserRole(null, user, role);
-			userRoleDAO.save(userRole);
+			Role roleFind = roleDAO.findByIdRole(role.getIdRole());
+			if (roleFind != null) {
+				userRole = new UserRole(null, user, role);
+				userRoleDAO.save(userRole);
+			}
 		}
 	}
 

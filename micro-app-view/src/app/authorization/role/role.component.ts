@@ -1,6 +1,8 @@
+import { AppComponent } from './../../app.component';
 import { Role } from '../../model/Role';
 import { Component, OnInit } from '@angular/core';
 import { RoleService } from './role.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-role',
@@ -8,56 +10,63 @@ import { RoleService } from './role.service';
 })
 export class RoleComponent implements OnInit {
 
-  blockedDocument: boolean = false;
   rolePrincipal: Role;
   lRoles: Role[];
 
-  constructor(private roleService: RoleService) { }
+  constructor(
+    private appComponent: AppComponent,
+    private roleService: RoleService) { }
 
   ngOnInit() {
     this.rolePrincipal = new Role();
     this.getListRole();
   }
 
-  public saveRole(): void {
-    this.blockedDocument = true;
-    if (this.rolePrincipal.idRole == null) {
-      this.roleService.postRole(this.rolePrincipal).subscribe(
-        (response) => {
-          this.rolePrincipal = response.role;
-          this.getListRole();
-          this.blockedDocument = false;
-        }
-      );
-    } else {
-      this.roleService.putRole(this.rolePrincipal).subscribe(
-        (response) => {
-          this.rolePrincipal = response.role;
-          this.getListRole();
-          this.blockedDocument = false;
-        }
-      );
+  public saveRole(form: NgForm): void {
+    if (form.valid) {
+      this.appComponent.blockDocument();
+      if (this.rolePrincipal.idRole == null) {
+        this.roleService.postRole(this.rolePrincipal).subscribe(
+          (response) => {
+            this.rolePrincipal = response.role;
+            this.getListRole();
+            this.appComponent.unblockDocument();
+            this.appComponent.showMessageResponse(response);
+          }
+        );
+      } else {
+        this.roleService.putRole(this.rolePrincipal).subscribe(
+          (response) => {
+            this.rolePrincipal = response.role;
+            this.getListRole();
+            this.appComponent.unblockDocument();
+            this.appComponent.showMessageResponse(response);
+          }
+        );
+      }
     }
   }
 
   public deleteRole(): void {
-    this.blockedDocument = true;
+    this.appComponent.blockDocument();
     this.roleService.deleteRole(this.rolePrincipal).subscribe(
       (response) => {
         this.clean();
         this.getListRole();
-        this.blockedDocument = false;
+        this.appComponent.unblockDocument();
+        this.appComponent.showMessageResponse(response);
       }
     );
   }
 
   public deleteRoleTable(roleDelete: Role): void {
-    this.blockedDocument = true;
+    this.appComponent.blockDocument();
     this.roleService.deleteRole(roleDelete).subscribe(
       (response) => {
         this.clean();
         this.getListRole();
-        this.blockedDocument = false;
+        this.appComponent.unblockDocument();
+        this.appComponent.showMessageResponse(response);
       }
     );
   }

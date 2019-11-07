@@ -20,7 +20,6 @@ import com.johnduq.microappservice.control.IRoleControl;
 import com.johnduq.microappservice.control.IUserControl;
 import com.johnduq.microappservice.control.IUserRoleControl;
 import com.johnduq.microappservice.model.dto.Response;
-import com.johnduq.microappservice.model.entity.User;
 import com.johnduq.microappservice.service.config.GeneralPathValue;
 import com.johnduq.microappservice.service.config.UserPathValue;
 import com.johnduq.microappservice.util.MessageUtil;
@@ -122,7 +121,7 @@ public class UserService {
 
 	@DeleteMapping(path = UserPathValue.USER_ID)
 	@Secured({ Roles.ADMIN })
-	public Response putUser(@PathVariable(name = "id") Integer idUser) {
+	public Response deleteUser(@PathVariable(name = "id") Integer idUser) {
 		try {
 			UserTransaction userResponse = new UserTransaction();
 			userResponse.setUser(iUserControl.delete(idUser));
