@@ -4,7 +4,7 @@ plugins {
 	id 'java'
 }
 
-group = 'com.johnduq.example'
+group = 'com.johnduq.microappservice'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
@@ -18,9 +18,32 @@ repositories {
 	mavenCentral()
 }
 
+//Tarea fatJar para construir un JAR con todas las dependencias empaquetadas
+task fatJar(type: Jar) {
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } } {
+        exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+    }
+    manifest {
+        attributes 'Main-Class': 'com.johnduq.microappservice.MicroAppServiceApplication'
+    }
+    with jar
+}
+
 dependencies {
+	//Dependencia para servicios web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//Dependencias para acceso a datos
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'mysql:mysql-connector-java'
+	//Dependencias de seguridad
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	compile "io.jsonwebtoken:jjwt-api:0.10.5"
+	compile "io.jsonwebtoken:jjwt-impl:0.10.5"
+	compile "io.jsonwebtoken:jjwt-jackson:0.10.5"
+	//Dependencias lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	//Dependencias de testing
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

@@ -1,0 +1,109 @@
+<form #roleForm="ngForm">
+    <div class="card border-info mb-3 shadow">
+        <div class="card-header">Admin</div>
+        <div class="card-body text-info">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon3">Id</span>
+                            </div>
+                            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+                                value="{{ rolePrincipal.idRole }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon3">Name</span>
+                            </div>
+                            <input type="text" class="form-control"
+                                [ngClass]="{'is-valid': !roleName.invalid, 'is-invalid': roleName.invalid && (roleName.dirty || roleName.touched)}"
+                                name="roleName" #roleName="ngModel" aria-describedby="basic-addon3"
+                                [readonly]="rolePrincipal.idRole == 1" required minlength="5" maxlength="20"
+                                pattern="[a-zA-Z]*" [(ngModel)]="rolePrincipal.name">
+                            <div class="valid-feedback"
+                                *ngIf="!(roleName.invalid && (roleName.dirty || roleName.touched))">
+                                Looks good
+                            </div>
+                            <div class="invalid-feedback"
+                                *ngIf="roleName.invalid && (roleName.dirty || roleName.touched)">
+                                <div *ngIf="roleName.errors.required">
+                                    Is required
+                                </div>
+                                <div *ngIf="roleName.errors.pattern">
+                                    Only alphabet characters
+                                </div>
+                                <div *ngIf="roleName.errors.minlength">
+                                    Must have minimum 5 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Description</span>
+                            </div>
+                            <textarea class="form-control" aria-label="With textarea" name="roleDescription"
+                                [readonly]="rolePrincipal.idRole == 1"
+                                [(ngModel)]="rolePrincipal.description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-success"
+                            label="Save" icon="pi pi-check" (click)="saveRole(roleForm);"
+                            [disabled]="rolePrincipal.idRole == 1"></button>
+                        <button pButton type="reset" class="ui-button-raised ui-button-rounded" label="Clean"
+                            icon="pi pi-refresh" (click)="roleForm.reset();clean();"></button>
+                        <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-danger"
+                            label="Delete" icon="pi pi-trash"
+                            [disabled]="rolePrincipal.idRole == null || rolePrincipal.idRole == 1"
+                            (click)="roleForm.reset();deleteRole();"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card border-info mb-3 shadow">
+        <div class="card-header">List</div>
+        <div class="card-body text-info">
+            <div class="container">
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="table-info">
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let role of lRoles">
+                            <td>{{ role.idRole }}</td>
+                            <td>{{ role.name }}</td>
+                            <td>{{ role.description }}</td>
+                            <td>
+                                <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Edit"
+                                    icon="pi pi-pencil" (click)="editRole(role)"></button>
+                                <button pButton type="button"
+                                    class="ui-button-raised ui-button-rounded ui-button-danger" label="Delete"
+                                    icon="pi pi-trash" [disabled]="role.idRole == 1"
+                                    (click)="roleForm.reset();deleteRoleTable(role);"></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
