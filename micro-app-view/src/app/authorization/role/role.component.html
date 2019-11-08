@@ -8,19 +8,13 @@
                 <div class="row">
                     <div class="col">
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3">Id</span>
-                            </div>
                             <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
-                                value="{{ rolePrincipal.idRole }}" disabled>
+                                placeholder="Id" value="{{ rolePrincipal.idRole }}" disabled>
                         </div>
                     </div>
                     <div class="col">
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3">Name</span>
-                            </div>
-                            <input type="text" class="form-control"
+                            <input type="text" class="form-control" placeholder="Name"
                                 [ngClass]="{'is-valid': !roleName.invalid, 'is-invalid': roleName.invalid && (roleName.dirty || roleName.touched)}"
                                 name="roleName" #roleName="ngModel" aria-describedby="basic-addon3"
                                 [readonly]="rolePrincipal.idRole == 1" required minlength="5" maxlength="20"
@@ -47,11 +41,8 @@
                 <div class="row">
                     <div class="col">
                         <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Description</span>
-                            </div>
                             <textarea class="form-control" aria-label="With textarea" name="roleDescription"
-                                [readonly]="rolePrincipal.idRole == 1"
+                                placeholder="Description" [readonly]="rolePrincipal.idRole == 1"
                                 [(ngModel)]="rolePrincipal.description"></textarea>
                         </div>
                     </div>

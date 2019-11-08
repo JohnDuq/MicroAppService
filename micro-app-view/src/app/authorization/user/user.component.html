@@ -8,20 +8,14 @@
                 <div class="row">
                     <div class="col">
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3">Id</span>
-                            </div>
-                            <input type="text" class="form-control" id="idUser" name="idUser"
+                            <input type="text" class="form-control" id="idUser" name="idUser" placeholder="Id"
                                 [(ngModel)]="userSelected.user.idUser" disabled aria-describedby="basic-addon3">
                         </div>
                     </div>
                     <div class="col">
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3">Username</span>
-                            </div>
                             <input type="text" class="form-control" id="nameUser" name="nameUser" #userName="ngModel"
-                                name="userName"
+                                name="userName" placeholder="Username"
                                 [ngClass]="{'is-valid': !userName.invalid, 'is-invalid': userName.invalid && (userName.dirty || userName.touched)}"
                                 pattern="[a-zA-Z]*" required minlength="4" maxlength="30"
                                 [readonly]="userSelected.user.idUser == 1" [(ngModel)]="userSelected.user.username"
@@ -48,11 +42,9 @@
                 <div class="row">
                     <div class="col">
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3">Password</span>
-                            </div>
                             <input type="password" class="form-control" id="passwordUser" name="passwordUser"
-                                #passwordUser="ngModel" required minlength="4" (click)="$event.target.select()"
+                                placeholder="Password" #passwordUser="ngModel" required minlength="4"
+                                (click)="$event.target.select()"
                                 [ngClass]="{'is-valid': !passwordUser.invalid, 'is-invalid': passwordUser.invalid && (passwordUser.dirty || passwordUser.touched)}"
                                 [(ngModel)]="userSelected.user.password" aria-describedby="basic-addon3">
                             <div class="valid-feedback"
