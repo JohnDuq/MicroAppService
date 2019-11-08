@@ -3,7 +3,7 @@
         <div class="card-body text-info">
             <div class="container">
                 <div class="row">
-                    <div class="col text-info bold h5">Admin</div>
+                    <div class="col text-info bold h5">admin</div>
                 </div>
                 <div class="row">
                     <div class="col">
@@ -15,7 +15,7 @@
                     <div class="col">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" id="nameUser" name="nameUser" #userName="ngModel"
-                                name="userName" placeholder="Username"
+                                name="userName" placeholder="username"
                                 [ngClass]="{'is-valid': !userName.invalid, 'is-invalid': userName.invalid && (userName.dirty || userName.touched)}"
                                 pattern="[a-zA-Z]*" required minlength="4" maxlength="30"
                                 [readonly]="userSelected.user.idUser == 1" [(ngModel)]="userSelected.user.username"
@@ -27,13 +27,13 @@
                             <div class="invalid-feedback"
                                 *ngIf="userName.invalid && (userName.dirty || userName.touched)">
                                 <div *ngIf="userName.errors.required">
-                                    Is required
+                                    is required
                                 </div>
                                 <div *ngIf="userName.errors.pattern">
-                                    Only alphabet characters
+                                    only alphabet characters
                                 </div>
                                 <div *ngIf="userName.errors.minlength">
-                                    Must have minimum 4 characters
+                                    must have minimum 4 characters
                                 </div>
                             </div>
                         </div>
@@ -43,21 +43,21 @@
                     <div class="col">
                         <div class="input-group mb-3">
                             <input type="password" class="form-control" id="passwordUser" name="passwordUser"
-                                placeholder="Password" #passwordUser="ngModel" required minlength="4"
+                                placeholder="password" #passwordUser="ngModel" required minlength="4"
                                 (click)="$event.target.select()"
                                 [ngClass]="{'is-valid': !passwordUser.invalid, 'is-invalid': passwordUser.invalid && (passwordUser.dirty || passwordUser.touched)}"
                                 [(ngModel)]="userSelected.user.password" aria-describedby="basic-addon3">
                             <div class="valid-feedback"
                                 *ngIf="!(passwordUser.invalid && (passwordUser.dirty || passwordUser.touched))">
-                                Looks good
+                                looks good
                             </div>
                             <div class="invalid-feedback"
                                 *ngIf="passwordUser.invalid && (passwordUser.dirty || passwordUser.touched)">
                                 <div *ngIf="passwordUser.errors.required">
-                                    Is required
+                                    is required
                                 </div>
                                 <div *ngIf="passwordUser.errors.minlength">
-                                    Must have minimum 4 characters
+                                    must have minimum 4 characters
                                 </div>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                         <p-pickList id="roleUserList" name="roleUserList" [source]="userSelected.listRolesAvaible"
                             [target]="userSelected.listRolesUser" [responsive]="true" filterBy="idRole,name"
                             [showSourceControls]="false" [showSourceFilter]="false" [showTargetFilter]="false"
-                            [showTargetControls]="false" sourceHeader="Roles available" targetHeader="User roles"
+                            [showTargetControls]="false" sourceHeader="roles available" targetHeader="user roles"
                             dragdrop="true" [disabled]="userSelected.user.idUser == 1"
                             sourceFilterPlaceholder="Search by Role id or Name"
                             targetFilterPlaceholder="Search by Role id or Name">
@@ -85,19 +85,16 @@
                         </p-pickList>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="card-footer text-muted text-center">
-            <div class="container">
+                <br />
                 <div class="row">
-                    <div class="col">
+                    <div class="col text-center">
                         <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-success"
-                            (click)="saveUser(userForm);" label="Save" icon="pi pi-check"></button>
+                            (click)="saveUser(userForm);" style="min-width: 100px;" icon="pi pi-check"></button>
                         <button pButton type="reset" class="ui-button-raised ui-button-rounded"
-                            (click)="userForm.reset();clean();" label="Clean" icon="pi pi-refresh"></button>
+                            (click)="userForm.reset();clean();" style="min-width: 100px;" icon="pi pi-refresh"></button>
                         <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-danger"
                             [disabled]="userSelected.user.idUser == null || userSelected.user.idUser == 1"
-                            (click)="deleteUser();userForm.reset();" label="Delete" icon="pi pi-trash"></button>
+                            (click)="deleteUser();userForm.reset();" style="min-width: 100px;" icon="pi pi-trash"></button>
                     </div>
                 </div>
             </div>
@@ -107,15 +104,15 @@
         <div class="card-body text-info">
             <div class="container">
                 <div class="row">
-                    <div class="col text-info bold h5">List</div>
+                    <div class="col text-info bold h5">list</div>
                 </div>
                 <table class="table table-striped">
                     <thead>
                         <tr class="table-info">
-                            <th>Id</th>
-                            <th>Username</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th>id</th>
+                            <th>username</th>
+                            <th>status</th>
+                            <th>action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -128,12 +125,12 @@
                                     [(ngModel)]="user.statusBool"></p-inputSwitch>
                             </td>
                             <td>
-                                <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Edit"
+                                <button pButton type="button" class="ui-button-raised ui-button-rounded" style="min-width: 100px;"
                                     (click)="editUser(user);" icon="pi pi-pencil"></button>
                                 <button pButton type="button"
                                     class="ui-button-raised ui-button-rounded ui-button-danger"
                                     (click)="userForm.reset();deleteUserList(user);" [disabled]="user.idUser == 1"
-                                    label="Delete" icon="pi pi-trash"></button>
+                                    style="min-width: 100px;" icon="pi pi-trash"></button>
                             </td>
                         </tr>
                     </tbody>

@@ -32,22 +32,22 @@ export class AppComponent {
 
   addMessageSuccesSummary(dtl: string): void {
     this.messageService.clear();
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: dtl });
+    this.messageService.add({ severity: 'success', summary: 'success', detail: dtl });
   }
 
   addMessageInfoSummary(dtl: string): void {
     this.messageService.clear();
-    this.messageService.add({ severity: 'info', summary: 'Info', detail: dtl });
+    this.messageService.add({ severity: 'info', summary: 'info', detail: dtl });
   }
 
   addMessageWarnSummary(dtl: string): void {
     this.messageService.clear();
-    this.messageService.add({ severity: 'warn', summary: 'Warning', detail: dtl });
+    this.messageService.add({ severity: 'warn', summary: 'warning', detail: dtl });
   }
 
   addMessageErrorSummary(dtl: string): void {
     this.messageService.clear();
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: dtl });
+    this.messageService.add({ severity: 'error', summary: 'error', detail: dtl });
   }
 
   showMessageResponse(rsp: Response): void {

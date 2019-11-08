@@ -3,36 +3,36 @@
         <div class="card-body text-info">
             <div class="container">
                 <div class="row">
-                    <div class="col text-info bold h5">Admin</div>
+                    <div class="col text-info bold h5">admin</div>
                 </div>
                 <div class="row">
                     <div class="col">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
-                                placeholder="Id" value="{{ rolePrincipal.idRole }}" disabled>
+                                placeholder="id" value="{{ rolePrincipal.idRole }}" disabled>
                         </div>
                     </div>
                     <div class="col">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Name"
+                            <input type="text" class="form-control" placeholder="name"
                                 [ngClass]="{'is-valid': !roleName.invalid, 'is-invalid': roleName.invalid && (roleName.dirty || roleName.touched)}"
                                 name="roleName" #roleName="ngModel" aria-describedby="basic-addon3"
                                 [readonly]="rolePrincipal.idRole == 1" required minlength="5" maxlength="20"
                                 pattern="[a-zA-Z]*" [(ngModel)]="rolePrincipal.name">
                             <div class="valid-feedback"
                                 *ngIf="!(roleName.invalid && (roleName.dirty || roleName.touched))">
-                                Looks good
+                                looks good
                             </div>
                             <div class="invalid-feedback"
                                 *ngIf="roleName.invalid && (roleName.dirty || roleName.touched)">
                                 <div *ngIf="roleName.errors.required">
-                                    Is required
+                                    is required
                                 </div>
                                 <div *ngIf="roleName.errors.pattern">
-                                    Only alphabet characters
+                                    only alphabet characters
                                 </div>
                                 <div *ngIf="roleName.errors.minlength">
-                                    Must have minimum 5 characters
+                                    must have minimum 5 characters
                                 </div>
                             </div>
                         </div>
@@ -42,24 +42,21 @@
                     <div class="col">
                         <div class="input-group">
                             <textarea class="form-control" aria-label="With textarea" name="roleDescription"
-                                placeholder="Description" [readonly]="rolePrincipal.idRole == 1"
+                                placeholder="description" [readonly]="rolePrincipal.idRole == 1"
                                 [(ngModel)]="rolePrincipal.description"></textarea>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="card-footer text-muted text-center">
-            <div class="container">
+                <br />
                 <div class="row">
-                    <div class="col">
+                    <div class="col text-center">
                         <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-success"
-                            label="Save" icon="pi pi-check" (click)="saveRole(roleForm);"
+                            style="min-width: 100px;" icon="pi pi-check" (click)="saveRole(roleForm);"
                             [disabled]="rolePrincipal.idRole == 1"></button>
-                        <button pButton type="reset" class="ui-button-raised ui-button-rounded" label="Clean"
-                            icon="pi pi-refresh" (click)="roleForm.reset();clean();"></button>
+                        <button pButton type="reset" class="ui-button-raised ui-button-rounded"
+                            style="min-width: 100px;" icon="pi pi-refresh" (click)="roleForm.reset();clean();"></button>
                         <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-danger"
-                            label="Delete" icon="pi pi-trash"
+                            style="min-width: 100px;" icon="pi pi-trash"
                             [disabled]="rolePrincipal.idRole == null || rolePrincipal.idRole == 1"
                             (click)="roleForm.reset();deleteRole();"></button>
                     </div>
@@ -71,15 +68,15 @@
         <div class="card-body text-info">
             <div class="container">
                 <div class="row">
-                    <div class="col text-info bold h5">List</div>
+                    <div class="col text-info bold h5">list</div>
                 </div>
                 <table class="table table-striped">
                     <thead>
                         <tr class="table-info">
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Action</th>
+                            <th>id</th>
+                            <th>name</th>
+                            <th>description</th>
+                            <th>action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,11 +85,11 @@
                             <td>{{ role.name }}</td>
                             <td>{{ role.description }}</td>
                             <td>
-                                <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Edit"
-                                    icon="pi pi-pencil" (click)="editRole(role)"></button>
+                                <button pButton type="button" class="ui-button-raised ui-button-rounded"
+                                    style="min-width: 100px;" icon="pi pi-pencil" (click)="editRole(role)"></button>
                                 <button pButton type="button"
-                                    class="ui-button-raised ui-button-rounded ui-button-danger" label="Delete"
-                                    icon="pi pi-trash" [disabled]="role.idRole == 1"
+                                    class="ui-button-raised ui-button-rounded ui-button-danger"
+                                    style="min-width: 100px;" icon="pi pi-trash" [disabled]="role.idRole == 1"
                                     (click)="roleForm.reset();deleteRoleTable(role);"></button>
                             </td>
                         </tr>

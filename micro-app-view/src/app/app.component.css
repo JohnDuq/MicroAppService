@@ -1,0 +1,19 @@
+:host ::ng-deep .custom-toast .ui-toast-message-success {
+    background: linear-gradient(to right, #17ABD1, #17ABD1);
+}
+
+:host ::ng-deep .custom-toast .ui-toast-message-error {
+    background: linear-gradient(to right, #E91224, #E91224);
+}
+
+:host ::ng-deep .custom-toast .ui-toast-message-text-content {
+    color: #ffffff;
+}
+
+:host ::ng-deep .custom-toast .ui-toast-close-icon {
+    color: white !important;
+}
+
+:host ::ng-deep .custom-toast .ui-toast-icon {
+    color: white !important;
+}
