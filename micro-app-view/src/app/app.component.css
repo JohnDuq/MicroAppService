@@ -17,3 +17,8 @@
 :host ::ng-deep .custom-toast .ui-toast-icon {
     color: white !important;
 }
+
+:host ::ng-deep .custom-progressBar .ui-progressbar .ui-progressbar-value {
+    background: #17ABD1;
+    z-index: -1  !important;
+}
