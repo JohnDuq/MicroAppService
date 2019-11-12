@@ -1,3 +1,4 @@
+import { AppComponent } from './../app.component';
 import { MessageUtil } from './../util/MessageUtil';
 import { LoginResponse } from './../model/LoginResponse';
 import { AuthenticationService } from './../service/Authentication';
@@ -14,8 +15,6 @@ import { MessageService } from 'primeng/components/common/messageservice';
 })
 export class LoginComponent implements OnInit {
 
-  messageUtil: MessageUtil = new MessageUtil();
-  blockedDocument: boolean = false;
   loginResponse = new LoginResponse();
   username = '';
   password = '';
@@ -24,7 +23,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
-    private messageService: MessageService
+    private appComponent: AppComponent
     ) { }
 
   ngOnInit() {
@@ -39,12 +38,12 @@ export class LoginComponent implements OnInit {
   }
 
   checkLogin() {
-    this.blockedDocument = true;
+    this.appComponent.blockDocument();
     this.authenticationService.authenticate(this.username, this.password).subscribe(
       (response) => {
         this.loginResponse = response;
         if (this.loginResponse.token == null || this.loginResponse.token === undefined || this.loginResponse.token === '') {
-          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Bad credentials' });
+          this.appComponent.addMessageComplete('error', 'Error Message', 'Bad credentials');
           sessionStorage.removeItem('Authorization');
           sessionStorage.removeItem('username');
         } else {
@@ -53,7 +52,7 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('Authorization', tokenStr);
           this.router.navigate(['home']);
         }
-        this.blockedDocument = false;
+        this.appComponent.unblockDocument();
       }
     );
   }

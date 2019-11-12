@@ -19,7 +19,7 @@
                                 [ngClass]="{'is-valid': !userName.invalid, 'is-invalid': userName.invalid && (userName.dirty || userName.touched)}"
                                 pattern="[a-zA-Z]*" required minlength="4" maxlength="30"
                                 [readonly]="userSelected.user.idUser == 1" [(ngModel)]="userSelected.user.username"
-                                aria-describedby="basic-addon3" required>
+                                aria-describedby="basic-addon3">
                             <div class="valid-feedback"
                                 *ngIf="!(userName.invalid && (userName.dirty || userName.touched))">
                                 Looks good
