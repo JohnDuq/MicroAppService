@@ -1,42 +1,44 @@
 <p-toast [style]="{marginTop: '80px'}"></p-toast>
 <p-blockUI [blocked]="blockedDocument"></p-blockUI>
 <br />
-<div class="card border-info mb-3 shadow">
-    <div class="card-body text-info">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text text-info" id="basic-addon3">Username</span>
+<br />
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <div class="card border-light mb-3 shadow">
+            <div class="card-body text-info">
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <div class="col text-info bold h2">login</div>
                         </div>
-                        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
-                            [(ngModel)]="username">
+                    </div><br />
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control"
+                                    aria-describedby="basic-addon3" placeholder="username"
+                                    (click)="$event.target.select()" [(ngModel)]="username">
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text text-info" id="basic-addon3">Password</span>
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <input type="password" class="form-control" id="basic-url"
+                                    (click)="$event.target.select()" [(ngModel)]="password" placeholder="password">
+                            </div>
                         </div>
-                        <input type="password" class="form-control" id="basic-url" [(ngModel)]="password">
+                    </div>
+                    <div class="row">
+                        <div class="col text-center">
+                            <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-success"
+                                (click)="checkLogin()" style="min-width: 100px;" icon="pi pi-check"></button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="card-footer text-muted text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <button pButton type="button" class="ui-button-raised ui-button-rounded ui-button-success"
-                        (click)="checkLogin()" label="Login" icon="pi pi-check"></button>
-                    <button pButton type="button" class="ui-button-raised ui-button-rounded" label="Clean"
-                        (click)="clean()" icon="pi pi-refresh"></button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="col-3"></div>
 </div>

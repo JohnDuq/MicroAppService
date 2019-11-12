@@ -1,28 +1,28 @@
 <div>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand text-info" href="#">
+    <a class="navbar-brand text-info h1" href="#">
       <img src="../../../assets/images/ironmanlogo.jpg" width="30" height="30" class="d-inline-block align-top"
         alt="{{ title }}" routerLink="/home">
       {{ title }}
     </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item" routerLinkActive="active" *ngIf="loginService.isUserLoggedIn()">
-          <a class="nav-link" routerLink="/home">Home</a>
+        <li class="nav-item" routerLinkActive="active font-italic" *ngIf="loginService.isUserLoggedIn()">
+          <a class="nav-link text-info" routerLink="/home">home</a>
         </li>
-        <li class="nav-item" routerLinkActive="active" *ngIf="loginService.isUserLoggedIn()">
-          <a class="nav-link" routerLink="/auth">Auth</a>
+        <li class="nav-item" routerLinkActive="active font-italic" *ngIf="loginService.isUserLoggedIn()">
+          <a class="nav-link text-info" routerLink="/auth">auth</a>
         </li>
       </ul>
       <ul class="navbar-nav mr-nav">
         <li class="nav-item" *ngIf="loginService.isUserLoggedIn()">
           <a class="nav-link text-info">{{user}}</a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/about">About</a>
+        <li class="nav-item" routerLinkActive="active font-italic">
+          <a class="nav-link" routerLink="/about">about</a>
         </li>
         <li class="nav-item" *ngIf="loginService.isUserLoggedIn()">
-          <button (click)="logOut()" class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
+          <button (click)="logOut()" class="btn btn-outline-danger my-2 my-sm-0" type="submit">logout</button>
         </li>
       </ul>
     </div>

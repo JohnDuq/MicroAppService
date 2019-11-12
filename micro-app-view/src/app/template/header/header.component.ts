@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
     templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
-    title: string = 'Micro-App-View';
+    title: string = 'app';
     user: string = sessionStorage.getItem('username');
     constructor(private router: Router,private loginService: AuthenticationService) { }
 
