@@ -1,5 +1,4 @@
 import { AppComponent } from './../app.component';
-import { MessageUtil } from './../util/MessageUtil';
 import { LoginResponse } from './../model/LoginResponse';
 import { AuthenticationService } from './../service/Authentication';
 

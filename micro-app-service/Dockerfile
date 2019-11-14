@@ -1,5 +1,5 @@
 # Image Java
-FROM openjdk:latest
+FROM openjdk:8-jdk-alpine
 # Copy Project to container
 COPY ./build/libs/micro-app-service-0.0.1-SNAPSHOT.jar /usr/local
 # Folder as workdir

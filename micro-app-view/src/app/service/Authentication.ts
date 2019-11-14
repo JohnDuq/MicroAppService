@@ -14,7 +14,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
-  authenticate(username, password): Observable<LoginResponse> {
+  public authenticate(username, password): Observable<LoginResponse> {
     let userLogin = new UserLogin();
     userLogin.username = username;
     userLogin.password = password;
@@ -28,7 +28,7 @@ export class AuthenticationService {
       );
   }
 
-  isUserLoggedIn() {
+  public isUserLoggedIn() {
     let username = sessionStorage.getItem('username');
     let token = sessionStorage.getItem('Authorization');
     if (username != null && username != 'null' && token != null && token != 'null') {
@@ -39,7 +39,7 @@ export class AuthenticationService {
     }
   }
 
-  logOut() {
+  public logOut() {
     sessionStorage.removeItem('Authorization');
     sessionStorage.removeItem('username');
   }

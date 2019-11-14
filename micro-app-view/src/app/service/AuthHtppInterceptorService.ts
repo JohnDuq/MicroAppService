@@ -9,7 +9,7 @@ export class AuthHtppInterceptorService implements HttpInterceptor {
 
     constructor() { }
 
-    intercept(httpRequest: HttpRequest<any>, next: HttpHandler) {
+    public intercept(httpRequest: HttpRequest<any>, next: HttpHandler) {
 
         if (sessionStorage.getItem('username') && sessionStorage.getItem('Authorization')) {
             httpRequest = httpRequest.clone({

@@ -1,12 +1,12 @@
 version: '3'
 services:
  database:
-  image: ma_db_img
-  container_name: ma_db_cnt
+  image: database_img
+  container_name: database_cnt
   build: ./micro-app-db
  service:
-  image: ma_srv_img
-  container_name: ma_srv_cnt
+  image: service_img
+  container_name: service_cnt
   build: ./micro-app-service
   ports:
    - "8080:8080"
