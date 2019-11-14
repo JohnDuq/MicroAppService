@@ -4,8 +4,6 @@ services:
   image: ma_db_img
   container_name: ma_db_cnt
   build: ./micro-app-db
-  ports:
-   - "3306:3306"
  service:
   image: ma_srv_img
   container_name: ma_srv_cnt
@@ -16,5 +14,3 @@ services:
    - database
   depends_on:
    - database
-  environment:
-   WAIT_HOSTS: database:3306
