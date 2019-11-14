@@ -1,8 +1,20 @@
 version: '3'
 services:
- db:
-  image: mysql
-  environment:
-   MYSQL_ROOT_PASSWORD: 123456
+ database:
+  image: ma_db_img
+  container_name: ma_db_cnt
+  build: ./micro-app-db
   ports:
-   - 3307:3306
+   - "3306:3306"
+  links:
+   - database
+ service:
+  image: ma_srv_img
+  container_name: ma_srv_cnt
+  build: ./micro-app-service
+  ports:
+   - "8080:8080"
+  depends_on:
+   - database
+  environment:
+   WAIT_HOSTS: database:3306
