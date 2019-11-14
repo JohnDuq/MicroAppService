@@ -10,5 +10,6 @@ Proyecto que implementa microservicios en una arquitectura Angular-JavaSpringBoo
 + PASS: ROOT
 
 # Ejecución de docker compose
+Debe ejecutar en el siguiente orden: 
 1. docker-compose up database
 2. docker-compose up service
