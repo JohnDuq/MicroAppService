@@ -14,3 +14,13 @@ services:
    - database
   depends_on:
    - database
+ view:
+  image: view_img
+  container_name: view_cnt
+  build: ./micro-app-view
+  ports:
+   - "4200:80"
+  links:
+   - service
+  depends_on:
+   - service

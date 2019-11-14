@@ -5,7 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const urlLogin = 'http://localhost:8080/api/microappservice/login';
+//const urlLogin = 'http://localhost:8080/api/microappservice/login';
+const urlLogin = 'http://service:8080/api/microappservice/login';
 
 @Injectable({
   providedIn: 'root'

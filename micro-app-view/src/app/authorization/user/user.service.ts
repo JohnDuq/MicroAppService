@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/model/User';
 import { UserResponse } from 'src/app/model/UserResponse';
-import { IfStmt } from '@angular/compiler';
 
 const urlEndPoint = "http://localhost:8080/api/microappservice/user";
 
