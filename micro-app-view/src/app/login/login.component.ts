@@ -1,5 +1,4 @@
 import { AppComponent } from './../app.component';
-import { MessageUtil } from './../util/MessageUtil';
 import { LoginResponse } from './../model/LoginResponse';
 import { AuthenticationService } from './../service/Authentication';
 
@@ -56,4 +55,11 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+  onKeydown(event) {
+    if (event.key === "Enter") {
+      this.checkLogin();
+    }
+  }
+
 }

@@ -1,3 +1,4 @@
+import { ConstantsService } from './ConstantsService';
 import { AuthHtppInterceptorService } from './service/AuthHtppInterceptorService';
 import { AuthGaurdService } from './service/AuthGaurdService';
 import { BrowserModule } from '@angular/platform-browser';
@@ -76,6 +77,7 @@ const routes: Routes = [
    ],
    providers: [
       RoleService,
+      ConstantsService,
       {
          provide: HTTP_INTERCEPTORS, useClass: AuthHtppInterceptorService, multi: true
       }

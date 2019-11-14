@@ -10,5 +10,5 @@ export class FooterComponent {
     author: string = 'Jonathan Duque Ramos';
     twitter: string = '@JDuqueRamos';
 
-    constructor(private loginService: AuthenticationService) { }
+    constructor(public loginService: AuthenticationService) { }
 }
