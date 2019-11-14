@@ -6,3 +6,5 @@ COPY ./build/libs/micro-app-service-0.0.1-SNAPSHOT.jar /usr/local
 WORKDIR /usr/local
 # Execute project
 ENTRYPOINT java -jar micro-app-service-0.0.1-SNAPSHOT.jar
+# Expose the port
+EXPOSE 8080
