@@ -6,14 +6,14 @@ services:
   build: ./micro-app-db
   ports:
    - "3306:3306"
-  links:
-   - database
  service:
   image: ma_srv_img
   container_name: ma_srv_cnt
   build: ./micro-app-service
   ports:
    - "8080:8080"
+  links:
+   - database
   depends_on:
    - database
   environment:
