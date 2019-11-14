@@ -1,3 +1,4 @@
+import { ConstantsService } from './../../ConstantsService';
 import { map } from 'rxjs/operators';
 import { UserGetResponse } from './../../model/UserGetResponse';
 import { Injectable } from '@angular/core';
@@ -6,18 +7,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/model/User';
 import { UserResponse } from 'src/app/model/UserResponse';
 
-const urlEndPoint = "http://localhost:8080/api/microappservice/user";
-
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  private urlEndPoint: string;
+
+  constructor(private http: HttpClient, private constantsService: ConstantsService) {
+    this.urlEndPoint = this.constantsService.baseAppUrl + '/user';
+  }
 
   getUsers(): Observable<UserGetResponse> {
     return this.http.get<UserGetResponse>
-      (urlEndPoint,
+      (this.urlEndPoint,
         {
           responseType: 'json',
           withCredentials: true
@@ -36,7 +39,7 @@ export class UserService {
 
   getUser(user: User): Observable<UserResponse> {
     return this.http.get<UserResponse>
-      (urlEndPoint + "/" + user.idUser,
+      (this.urlEndPoint + "/" + user.idUser,
         {
           responseType: 'json',
           withCredentials: true
@@ -54,7 +57,7 @@ export class UserService {
 
   getUserByUsername(user: User): Observable<UserResponse> {
     return this.http.get<UserResponse>
-      (urlEndPoint + "/" + user.username + "/findByUsername",
+      (this.urlEndPoint + "/" + user.username + "/findByUsername",
         {
           responseType: 'json',
           withCredentials: true
@@ -72,7 +75,7 @@ export class UserService {
 
   postUser(userResponse: UserResponse): Observable<UserResponse> {
     return this.http.post<UserResponse>
-      (urlEndPoint, userResponse,
+      (this.urlEndPoint, userResponse,
         {
           responseType: 'json',
           withCredentials: true
@@ -88,7 +91,7 @@ export class UserService {
 
   putUser(userResponse: UserResponse): Observable<UserResponse> {
     return this.http.put<UserResponse>
-      (urlEndPoint, userResponse,
+      (this.urlEndPoint, userResponse,
         {
           responseType: 'json',
           withCredentials: true
@@ -104,7 +107,7 @@ export class UserService {
 
   deleteUser(user: User): Observable<UserResponse> {
     return this.http.delete<UserResponse>
-      (urlEndPoint + '/' + user.idUser,
+      (this.urlEndPoint + '/' + user.idUser,
         {
           responseType: 'json',
           withCredentials: true
