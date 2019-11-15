@@ -1,5 +1,5 @@
 # MicroAppService
-Proyecto que implementa microservicios en una arquitectura Angular-JavaSpringBoot-RDS
+Proyecto que implementa microservicios en una arquitectura Angular Boostrap-Java SpringBoot-RDS Mysql
 
 # Base de datos
 + USER: root
@@ -13,3 +13,4 @@ Proyecto que implementa microservicios en una arquitectura Angular-JavaSpringBoo
 Debe ejecutar en el siguiente orden: 
 1. docker-compose up database
 2. docker-compose up service
+3. docker-compose up view
