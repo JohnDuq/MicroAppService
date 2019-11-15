@@ -8,11 +8,14 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
     title: string = 'app';
-    user: string = sessionStorage.getItem('username');
     constructor(private router: Router,public loginService: AuthenticationService) { }
 
     ngOnInit() {
         
+    }
+
+    public getUsername(): string {
+        return sessionStorage.getItem('username');
     }
 
     logOut(): void {
