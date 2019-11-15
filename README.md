@@ -1,6 +1,8 @@
 # MicroAppService
 Proyecto que implementa microservicios en una arquitectura Angular Boostrap-Java SpringBoot-RDS Mysql
 
+![alt text](https://github.com/JohnDuq/MicroAppService/blob/develop/info/microservicio.png "Microservice")
+
 # Base de datos
 + USER: root
 + PASS: 123456
