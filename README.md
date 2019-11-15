@@ -1,5 +1,5 @@
 # MicroAppService
-Proyecto que implementa microservicios en una arquitectura Angular Boostrap-Java SpringBoot-RDS Mysql
+Proyecto que implementa arquitectura en microservicios ([Quiero saber mas](https://medium.com/@jonathan.duque.ramos/reactor-de-arco-7f43a1a07ef6))
 
 ![alt text](https://github.com/JohnDuq/MicroAppService/blob/develop/info/microservicio.png "Microservice")
 
