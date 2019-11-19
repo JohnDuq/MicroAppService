@@ -16,7 +16,7 @@
       </ul>
       <ul class="navbar-nav mr-nav">
         <li class="nav-item" *ngIf="loginService.isUserLoggedIn()">
-          <a class="nav-link text-info">{{user}}</a>
+          <a class="nav-link text-info">{{getUsername()}}</a>
         </li>
         <li class="nav-item" routerLinkActive="active font-italic">
           <a class="nav-link" routerLink="/about">about</a>
