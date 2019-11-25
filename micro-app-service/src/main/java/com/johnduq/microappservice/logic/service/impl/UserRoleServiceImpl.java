@@ -30,7 +30,7 @@ public class UserRoleServiceImpl implements IUserRoleService {
 		for (Role role : listRoles) {
 			Role roleFind = roleRepository.findByIdRole(role.getIdRole());
 			if (roleFind != null) {
-				userRole = new UserRole(null, user, role);
+				userRole = new UserRole(null, role, user);
 				userRoleRepository.save(userRole);
 			}
 		}

@@ -30,10 +30,10 @@ public class UserRole implements Serializable {
 	@Column
 	private Integer idUserRole;
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "idUser")
-	private User user;
-	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "idRole")
 	private Role role;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "idUser")
+	private User user;
 	
 }
