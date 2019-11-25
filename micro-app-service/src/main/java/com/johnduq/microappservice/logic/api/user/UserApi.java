@@ -35,17 +35,17 @@ public class UserApi {
 	private static final Logger logger = LoggerFactory.getLogger(UserApi.class);
 
 	@Autowired
-	private IUserService iUserControl;
+	private IUserService iUserService;
 	@Autowired
-	private IRoleService iRoleControl;
+	private IRoleService iRoleService;
 	@Autowired
-	private IUserRoleService iUserRoleControl;
+	private IUserRoleService iUserRoleService;
 
 	@GetMapping(path = UserPathValue.USER)
 	@Secured({ Roles.ADMIN })
 	public Response getUserService() {
 		try {
-			UserGetResponse userGetResponse = new UserGetResponse(iUserControl.findAll());
+			UserGetResponse userGetResponse = new UserGetResponse(iUserService.findAll());
 			return MessageUtil.addGenericSuccessMessage(userGetResponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -58,11 +58,11 @@ public class UserApi {
 	public Response findByIdUser(@PathVariable(name = "id") Integer idUser) {
 		try {
 			UserTransaction userResponse = new UserTransaction();
-			userResponse.setUser(iUserControl.findByIdUser(idUser));
+			userResponse.setUser(iUserService.findByIdUser(idUser));
 			userResponse.setListRolesUser(userResponse.getUser() == null ? new ArrayList()
-					: iRoleControl.findRoleByIdUser(userResponse.getUser().getIdUser()));
+					: iRoleService.findRoleByIdUser(userResponse.getUser().getIdUser()));
 			userResponse.setListRolesAvaible(userResponse.getUser() == null ? new ArrayList()
-					: iRoleControl.findAvaibleRolesByIdUser(userResponse.getUser().getIdUser()));
+					: iRoleService.findAvaibleRolesByIdUser(userResponse.getUser().getIdUser()));
 			return MessageUtil.addGenericSuccessMessage(userResponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -75,11 +75,11 @@ public class UserApi {
 	public Response findByIdUser(@PathVariable(name = "username") String username) {
 		try {
 			UserTransaction userResponse = new UserTransaction();
-			userResponse.setUser(iUserControl.findByUsername(username));
+			userResponse.setUser(iUserService.findByUsername(username));
 			userResponse.setListRolesUser(userResponse.getUser() == null ? new ArrayList()
-					: iRoleControl.findRoleByIdUser(userResponse.getUser().getIdUser()));
+					: iRoleService.findRoleByIdUser(userResponse.getUser().getIdUser()));
 			userResponse.setListRolesAvaible(userResponse.getUser() == null ? new ArrayList()
-					: iRoleControl.findAvaibleRolesByIdUser(userResponse.getUser().getIdUser()));
+					: iRoleService.findAvaibleRolesByIdUser(userResponse.getUser().getIdUser()));
 			return MessageUtil.addGenericSuccessMessage(userResponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -92,10 +92,10 @@ public class UserApi {
 	public Response postUser(@RequestBody UserTransaction userTransaction) {
 		try {
 			UserTransaction userResponse = new UserTransaction();
-			userResponse.setUser(iUserControl.save(userTransaction.getUser()));
-			iUserRoleControl.associateRolesToUser(userTransaction.getUser(), userTransaction.getListRolesUser());
-			userResponse.setListRolesUser(iRoleControl.findRoleByIdUser(userResponse.getUser().getIdUser()));
-			userResponse.setListRolesAvaible(iRoleControl.findAvaibleRolesByIdUser(userResponse.getUser().getIdUser()));
+			userResponse.setUser(iUserService.save(userTransaction.getUser()));
+			iUserRoleService.associateRolesToUser(userTransaction.getUser(), userTransaction.getListRolesUser());
+			userResponse.setListRolesUser(iRoleService.findRoleByIdUser(userResponse.getUser().getIdUser()));
+			userResponse.setListRolesAvaible(iRoleService.findAvaibleRolesByIdUser(userResponse.getUser().getIdUser()));
 			return MessageUtil.addGenericSuccessMessage(userResponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -108,10 +108,10 @@ public class UserApi {
 	public Response putUser(@RequestBody UserTransaction userTransaction) {
 		try {
 			UserTransaction userResponse = new UserTransaction();
-			userResponse.setUser(iUserControl.save(userTransaction.getUser()));
-			iUserRoleControl.associateRolesToUser(userTransaction.getUser(), userTransaction.getListRolesUser());
-			userResponse.setListRolesUser(iRoleControl.findRoleByIdUser(userResponse.getUser().getIdUser()));
-			userResponse.setListRolesAvaible(iRoleControl.findAvaibleRolesByIdUser(userResponse.getUser().getIdUser()));
+			userResponse.setUser(iUserService.save(userTransaction.getUser()));
+			iUserRoleService.associateRolesToUser(userTransaction.getUser(), userTransaction.getListRolesUser());
+			userResponse.setListRolesUser(iRoleService.findRoleByIdUser(userResponse.getUser().getIdUser()));
+			userResponse.setListRolesAvaible(iRoleService.findAvaibleRolesByIdUser(userResponse.getUser().getIdUser()));
 			return MessageUtil.addGenericSuccessMessage(userResponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -124,7 +124,7 @@ public class UserApi {
 	public Response deleteUser(@PathVariable(name = "id") Integer idUser) {
 		try {
 			UserTransaction userResponse = new UserTransaction();
-			userResponse.setUser(iUserControl.delete(idUser));
+			userResponse.setUser(iUserService.delete(idUser));
 			return MessageUtil.addGenericSuccessMessage(userResponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage());

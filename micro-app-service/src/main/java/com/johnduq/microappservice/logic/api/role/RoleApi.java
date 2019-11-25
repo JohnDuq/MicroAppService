@@ -33,13 +33,13 @@ public class RoleApi {
 	private static final Logger logger = LoggerFactory.getLogger(RoleApi.class);
 
 	@Autowired
-	private IRoleService iRoleControl;
+	private IRoleService iRoleService;
 
 	@GetMapping(path = RolePathValue.ROLE)
 	@Secured({ Roles.ADMIN })
 	public Response getRoleService() {
 		try {
-			RoleGetResponse roleGetResponse = new RoleGetResponse(iRoleControl.findAll());
+			RoleGetResponse roleGetResponse = new RoleGetResponse(iRoleService.findAll());
 			return MessageUtil.addGenericSuccessMessage(roleGetResponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -51,7 +51,7 @@ public class RoleApi {
 	@Secured({ Roles.ADMIN })
 	public Response findRoleById(@PathVariable(name = "id") Integer idRole) {
 		try {
-			RoleResponse roleResponse = new RoleResponse(iRoleControl.findByIdRole(idRole));
+			RoleResponse roleResponse = new RoleResponse(iRoleService.findByIdRole(idRole));
 			return MessageUtil.addGenericSuccessMessage(roleResponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -63,7 +63,7 @@ public class RoleApi {
 	@Secured({ Roles.ADMIN })
 	public Response postRole(@RequestBody Role role) {
 		try {
-			RoleResponse roleResponse = new RoleResponse(iRoleControl.save(role));
+			RoleResponse roleResponse = new RoleResponse(iRoleService.save(role));
 			return MessageUtil.addGenericSuccessMessage(roleResponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -75,7 +75,7 @@ public class RoleApi {
 	@Secured({ Roles.ADMIN })
 	public Response putRole(@RequestBody Role role) {
 		try {
-			RoleResponse roleResponse = new RoleResponse(iRoleControl.save(role));
+			RoleResponse roleResponse = new RoleResponse(iRoleService.save(role));
 			return MessageUtil.addGenericSuccessMessage(roleResponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -87,7 +87,7 @@ public class RoleApi {
 	@Secured({ Roles.ADMIN })
 	public Response deleteRole(@PathVariable(name = "id") Integer idRole) {
 		try {
-			RoleResponse roleResponse = new RoleResponse(iRoleControl.delete(idRole));
+			RoleResponse roleResponse = new RoleResponse(iRoleService.delete(idRole));
 			return MessageUtil.addGenericSuccessMessage(roleResponse);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
