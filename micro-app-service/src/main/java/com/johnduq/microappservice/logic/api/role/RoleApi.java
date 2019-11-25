@@ -28,9 +28,9 @@ import com.johnduq.microappservice.util.TypeConsume;
 @RestController
 @CrossOrigin(origins = OriginValid.HTTP_LOCALHOST_4200)
 @RequestMapping(value = GeneralPathValue.PRE_PATH, consumes = TypeConsume.APPLICATION_JSON, produces = TypeConsume.APPLICATION_JSON)
-public class RoleService {
+public class RoleApi {
 
-	private static final Logger logger = LoggerFactory.getLogger(RoleService.class);
+	private static final Logger logger = LoggerFactory.getLogger(RoleApi.class);
 
 	@Autowired
 	private IRoleService iRoleControl;

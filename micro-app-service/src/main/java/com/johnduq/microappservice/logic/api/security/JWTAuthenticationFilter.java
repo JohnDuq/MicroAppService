@@ -18,7 +18,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.johnduq.microappservice.dao.entity.User;
-import com.johnduq.microappservice.logic.api.auth.IJWTService;
+import com.johnduq.microappservice.logic.api.auth.IJWTApi;
 import com.johnduq.microappservice.logic.api.config.GeneralPathValue;
 import com.johnduq.microappservice.model.Response;
 import com.johnduq.microappservice.util.JsonUtil;
@@ -31,9 +31,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 	private static final String MICRO_APP_SERVICE = "MicroAppService";
 	private AuthenticationManager authenticationManager;
-	private IJWTService ijwtService;
+	private IJWTApi ijwtService;
 
-	public JWTAuthenticationFilter(AuthenticationManager authenticationManager, IJWTService ijwtService) {
+	public JWTAuthenticationFilter(AuthenticationManager authenticationManager, IJWTApi ijwtService) {
 		this.authenticationManager = authenticationManager;
 		this.ijwtService = ijwtService;
 		setRequiresAuthenticationRequestMatcher(

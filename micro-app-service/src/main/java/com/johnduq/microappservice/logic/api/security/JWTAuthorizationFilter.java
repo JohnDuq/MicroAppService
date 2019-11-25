@@ -14,16 +14,16 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import com.johnduq.microappservice.logic.api.auth.IJWTService;
+import com.johnduq.microappservice.logic.api.auth.IJWTApi;
 import com.johnduq.microappservice.util.TypeAuthValues;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
 	private static final Logger logger = LoggerFactory.getLogger(JWTAuthorizationFilter.class);
 
-	private IJWTService ijwtService;
+	private IJWTApi ijwtService;
 
-	public JWTAuthorizationFilter(AuthenticationManager authenticationManager, IJWTService ijwtService) {
+	public JWTAuthorizationFilter(AuthenticationManager authenticationManager, IJWTApi ijwtService) {
 		super(authenticationManager);
 		this.ijwtService = ijwtService;
 	}

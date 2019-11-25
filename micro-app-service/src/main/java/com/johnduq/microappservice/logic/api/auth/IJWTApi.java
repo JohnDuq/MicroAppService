@@ -10,7 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import io.jsonwebtoken.Claims;
 
-public interface IJWTService {
+public interface IJWTApi {
 
 	public String create(Authentication authentication) throws IOException;
 	

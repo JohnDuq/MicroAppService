@@ -30,9 +30,9 @@ import com.johnduq.microappservice.util.TypeConsume;
 @RestController
 @CrossOrigin(origins = OriginValid.HTTP_LOCALHOST_4200)
 @RequestMapping(value = GeneralPathValue.PRE_PATH, consumes = TypeConsume.APPLICATION_JSON, produces = TypeConsume.APPLICATION_JSON)
-public class UserService {
+public class UserApi {
 
-	private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserApi.class);
 
 	@Autowired
 	private IUserService iUserControl;

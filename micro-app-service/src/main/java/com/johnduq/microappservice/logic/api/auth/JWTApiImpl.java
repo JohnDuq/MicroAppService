@@ -29,7 +29,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
-public class JWTServiceImpl implements IJWTService {
+public class JWTApiImpl implements IJWTApi {
 
 	@Value("${microappservice.parameter.sessionvalid.hour}")
 	private String sessionValidHour;
