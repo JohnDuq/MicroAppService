@@ -8,7 +8,10 @@ build/
 ### Eclipse ###
 .metadata
 bin/
+bin/*
 tmp/
+logs/*
+*.gz
 *.tmp
 *.bak
 *.swp
