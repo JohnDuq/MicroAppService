@@ -1,4 +1,4 @@
-package com.johnduq.microappservice.api.security;
+package com.johnduq.microappservice.logic.api.security;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -17,9 +17,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.johnduq.microappservice.api.auth.IJWTService;
-import com.johnduq.microappservice.api.config.GeneralPathValue;
 import com.johnduq.microappservice.dao.entity.User;
+import com.johnduq.microappservice.logic.api.auth.IJWTService;
+import com.johnduq.microappservice.logic.api.config.GeneralPathValue;
 import com.johnduq.microappservice.model.Response;
 import com.johnduq.microappservice.util.JsonUtil;
 import com.johnduq.microappservice.util.MessageUtil;

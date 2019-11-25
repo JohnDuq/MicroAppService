@@ -1,4 +1,4 @@
-package com.johnduq.microappservice.service.impl;
+package com.johnduq.microappservice.logic.service.impl;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import com.johnduq.microappservice.dao.entity.User;
 import com.johnduq.microappservice.dao.entity.UserRole;
 import com.johnduq.microappservice.dao.repository.RoleRepository;
 import com.johnduq.microappservice.dao.repository.UserRoleRepository;
-import com.johnduq.microappservice.service.IUserRoleService;
+import com.johnduq.microappservice.logic.service.IUserRoleService;
 
 @Service
 public class UserRoleServiceImpl implements IUserRoleService {

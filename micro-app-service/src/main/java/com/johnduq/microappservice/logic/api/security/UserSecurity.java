@@ -1,4 +1,4 @@
-package com.johnduq.microappservice.api.security;
+package com.johnduq.microappservice.logic.api.security;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.johnduq.microappservice.dao.entity.Role;
-import com.johnduq.microappservice.service.IRoleService;
-import com.johnduq.microappservice.service.IUserService;
+import com.johnduq.microappservice.logic.service.IRoleService;
+import com.johnduq.microappservice.logic.service.IUserService;
 import com.johnduq.microappservice.util.TypeState;
 
 @Service

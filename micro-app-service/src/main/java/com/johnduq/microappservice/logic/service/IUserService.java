@@ -1,4 +1,4 @@
-package com.johnduq.microappservice.service;
+package com.johnduq.microappservice.logic.service;
 
 import java.util.List;
 

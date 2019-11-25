@@ -15,10 +15,10 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.johnduq.microappservice.api.auth.IJWTService;
-import com.johnduq.microappservice.api.security.JWTAuthenticationFilter;
-import com.johnduq.microappservice.api.security.JWTAuthorizationFilter;
-import com.johnduq.microappservice.api.security.UserSecurity;
+import com.johnduq.microappservice.logic.api.auth.IJWTService;
+import com.johnduq.microappservice.logic.api.security.JWTAuthenticationFilter;
+import com.johnduq.microappservice.logic.api.security.JWTAuthorizationFilter;
+import com.johnduq.microappservice.logic.api.security.UserSecurity;
 
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @Configuration

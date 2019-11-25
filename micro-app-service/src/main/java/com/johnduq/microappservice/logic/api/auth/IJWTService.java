@@ -1,4 +1,4 @@
-package com.johnduq.microappservice.api.auth;
+package com.johnduq.microappservice.logic.api.auth;
 
 import java.io.IOException;
 import java.util.Collection;

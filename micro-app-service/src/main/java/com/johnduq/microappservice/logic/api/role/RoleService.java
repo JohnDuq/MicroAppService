@@ -1,4 +1,4 @@
-package com.johnduq.microappservice.api.role;
+package com.johnduq.microappservice.logic.api.role;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.johnduq.microappservice.api.config.GeneralPathValue;
-import com.johnduq.microappservice.api.config.RolePathValue;
 import com.johnduq.microappservice.dao.entity.Role;
+import com.johnduq.microappservice.logic.api.config.GeneralPathValue;
+import com.johnduq.microappservice.logic.api.config.RolePathValue;
+import com.johnduq.microappservice.logic.service.IRoleService;
 import com.johnduq.microappservice.model.Response;
-import com.johnduq.microappservice.service.IRoleService;
 import com.johnduq.microappservice.util.MessageUtil;
 import com.johnduq.microappservice.util.OriginValid;
 import com.johnduq.microappservice.util.Roles;

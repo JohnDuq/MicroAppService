@@ -1,4 +1,4 @@
-package com.johnduq.microappservice.api.user;
+package com.johnduq.microappservice.logic.api.user;
 
 import java.util.ArrayList;
 
@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.johnduq.microappservice.api.config.GeneralPathValue;
-import com.johnduq.microappservice.api.config.UserPathValue;
+import com.johnduq.microappservice.logic.api.config.GeneralPathValue;
+import com.johnduq.microappservice.logic.api.config.UserPathValue;
+import com.johnduq.microappservice.logic.service.IRoleService;
+import com.johnduq.microappservice.logic.service.IUserRoleService;
+import com.johnduq.microappservice.logic.service.IUserService;
 import com.johnduq.microappservice.model.Response;
-import com.johnduq.microappservice.service.IRoleService;
-import com.johnduq.microappservice.service.IUserService;
-import com.johnduq.microappservice.service.IUserRoleService;
 import com.johnduq.microappservice.util.MessageUtil;
 import com.johnduq.microappservice.util.OriginValid;
 import com.johnduq.microappservice.util.Roles;

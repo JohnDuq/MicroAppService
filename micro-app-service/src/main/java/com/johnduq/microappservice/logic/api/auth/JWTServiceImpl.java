@@ -1,4 +1,4 @@
-package com.johnduq.microappservice.api.auth;
+package com.johnduq.microappservice.logic.api.auth;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -18,7 +18,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.johnduq.microappservice.api.security.SimpleGrantedAuthrityMixin;
+import com.johnduq.microappservice.logic.api.security.SimpleGrantedAuthrityMixin;
 import com.johnduq.microappservice.util.JsonKeyValue;
 import com.johnduq.microappservice.util.JsonUtil;
 import com.johnduq.microappservice.util.TypeAuthValues;

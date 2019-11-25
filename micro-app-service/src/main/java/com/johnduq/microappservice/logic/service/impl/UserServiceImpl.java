@@ -1,4 +1,4 @@
-package com.johnduq.microappservice.service.impl;
+package com.johnduq.microappservice.logic.service.impl;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.johnduq.microappservice.dao.entity.User;
 import com.johnduq.microappservice.dao.repository.UserRepository;
 import com.johnduq.microappservice.dao.repository.UserRoleRepository;
-import com.johnduq.microappservice.service.IUserService;
+import com.johnduq.microappservice.logic.service.IUserService;
 import com.johnduq.microappservice.util.BCryptUtil;
 
 @Service

@@ -1,4 +1,4 @@
-package com.johnduq.microappservice.api.security;
+package com.johnduq.microappservice.logic.api.security;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

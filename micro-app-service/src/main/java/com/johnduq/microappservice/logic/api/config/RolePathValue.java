@@ -1,4 +1,4 @@
-package com.johnduq.microappservice.api.config;
+package com.johnduq.microappservice.logic.api.config;
 
 public class RolePathValue {
 

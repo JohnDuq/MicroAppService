@@ -1,8 +1,8 @@
-package com.johnduq.microappservice.api.role;
+package com.johnduq.microappservice.logic.api.user;
 
 import java.util.List;
 
-import com.johnduq.microappservice.dao.entity.Role;
+import com.johnduq.microappservice.dao.entity.User;
 import com.johnduq.microappservice.model.Response;
 
 import lombok.AllArgsConstructor;
@@ -14,8 +14,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoleGetResponse extends Response {
+public class UserGetResponse extends Response {
 
-	private List<Role> listRoles;
+	private List<User> listUsers;
 	
 }

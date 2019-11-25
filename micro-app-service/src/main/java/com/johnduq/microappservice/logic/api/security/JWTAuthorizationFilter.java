@@ -1,4 +1,4 @@
-package com.johnduq.microappservice.api.security;
+package com.johnduq.microappservice.logic.api.security;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import com.johnduq.microappservice.api.auth.IJWTService;
+import com.johnduq.microappservice.logic.api.auth.IJWTService;
 import com.johnduq.microappservice.util.TypeAuthValues;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {

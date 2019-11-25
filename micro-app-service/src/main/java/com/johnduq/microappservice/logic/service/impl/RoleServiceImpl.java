@@ -1,4 +1,4 @@
-package com.johnduq.microappservice.service.impl;
+package com.johnduq.microappservice.logic.service.impl;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.johnduq.microappservice.dao.entity.Role;
 import com.johnduq.microappservice.dao.repository.RoleRepository;
 import com.johnduq.microappservice.dao.repository.UserRoleRepository;
-import com.johnduq.microappservice.service.IRoleService;
+import com.johnduq.microappservice.logic.service.IRoleService;
 
 @Service
 public class RoleServiceImpl implements IRoleService {
