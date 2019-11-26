@@ -24,7 +24,6 @@ import com.johnduq.microappservice.util.OriginValid;
 import com.johnduq.microappservice.util.Roles;
 import com.johnduq.microappservice.util.TypeConsume;
 
-
 @RestController
 @CrossOrigin(origins = OriginValid.HTTP_LOCALHOST_4200)
 @RequestMapping(value = GeneralPathValue.PRE_PATH, consumes = TypeConsume.APPLICATION_JSON, produces = TypeConsume.APPLICATION_JSON)
