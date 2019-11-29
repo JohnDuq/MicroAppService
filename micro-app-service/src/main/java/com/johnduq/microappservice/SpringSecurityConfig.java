@@ -15,10 +15,10 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.johnduq.microappservice.service.api.auth.IJWTService;
-import com.johnduq.microappservice.service.api.security.JWTAuthenticationFilter;
-import com.johnduq.microappservice.service.api.security.JWTAuthorizationFilter;
-import com.johnduq.microappservice.service.api.security.UserSecurity;
+import com.johnduq.microappservice.logic.api.auth.IJWTApi;
+import com.johnduq.microappservice.logic.api.security.JWTAuthenticationFilter;
+import com.johnduq.microappservice.logic.api.security.JWTAuthorizationFilter;
+import com.johnduq.microappservice.logic.api.security.UserSecurity;
 
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @Configuration
@@ -31,7 +31,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Autowired
-	private IJWTService iJWTService;
+	private IJWTApi iJWTService;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

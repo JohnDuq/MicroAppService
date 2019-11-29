@@ -1,7 +1,7 @@
 package com.johnduq.microappservice.util;
 
-import com.johnduq.microappservice.model.dto.Message;
-import com.johnduq.microappservice.model.dto.Response;
+import com.johnduq.microappservice.model.Message;
+import com.johnduq.microappservice.model.Response;
 
 public class MessageUtil {
 
