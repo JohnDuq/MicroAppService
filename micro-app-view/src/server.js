@@ -3,9 +3,9 @@ const path = require('path');
 
 const app = express();
 
-app.use(express.static(__dirname+'/dist/micro-app-view'));
+app.use(express.static(__dirname+'/micro-app-view/dist/micro-app-view'));
 app.get('/',function(req,res){
-    res.sendFile(path.join(__dirname+'/dist/micro-app-view/index.html'));
+    res.sendFile(path.join(__dirname+'/micro-app-view/dist/micro-app-view/index.html'));
 });
 
 app.listen(process.env.PORT || 8080);
