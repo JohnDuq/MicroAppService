@@ -13,10 +13,6 @@ public interface UserRepository extends CrudRepository<User, Integer>{
 	@Query("SELECT usr FROM User usr ORDER BY usr.idUser")
 	List<User> findAll();
 	
-	@Query("SELECT usr FROM User usr WHERE usr.idUser = :idUser")
-	User findByIdUser(@Param("idUser") Integer idUser);
-	
-	
 	@Query("SELECT usr FROM User usr WHERE usr.username = :username")
 	User findByUser(@Param("username") String username);
 	

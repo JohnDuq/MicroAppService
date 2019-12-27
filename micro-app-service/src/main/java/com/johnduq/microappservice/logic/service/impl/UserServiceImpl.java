@@ -38,7 +38,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public User findByIdUser(Integer idUser) {
-		return userRepository.findByIdUser(idUser);
+		return userRepository.findById(idUser).orElse(null);
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public User delete(Integer idUser) {
 		userRoleRepository.deleteUserRoleByIdUser(idUser);
-		User user = userRepository.findByIdUser(idUser);
+		User user = userRepository.findById(idUser).orElse(null);
 		userRepository.delete(user);
 		return user;
 	}
@@ -67,3 +67,4 @@ public class UserServiceImpl implements IUserService {
 	}
 
 }
+
